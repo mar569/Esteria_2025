@@ -27,10 +27,26 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, onClick }) => (
     >
         <div className="flex justify-center mb-4">{service.icon}</div>
         <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">{service.title}</h3>
-        <p className="text-gray-600 mb-4 text-center flex-grow">{service.description}</p>
-        <div className="flex justify-between items-center mb-4">
+        <p className="text-gray-600  text-center flex-grow">{service.description}</p>
+        <div className="flex justify-between items-center mb-6">
             <span className="text-mint-700 font-bold text-lg">{service.price}</span>
             <span className="text-gray-800 text-sm px-3 py-1 rounded-full">{service.duration}</span>
+        </div>
+        <div className='flex justify-center'>
+            <button
+                onClick={onClick}
+                style={{
+                    background: `radial-gradient(
+                    212.58% 2646.98% at 35.86% 50%,
+                    #158875 0,
+                    #04ae78 48.96%,
+                    #016238 100%
+                  )`,
+                }}
+                className="text-white px-7 py-2 rounded-full font-semibold hover:bg-mint-600 transition"
+            >
+                Выбрать
+            </button>
         </div>
     </div>
 );

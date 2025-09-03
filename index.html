@@ -4,29 +4,38 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Описание для поисковиков -->
     <meta
       name="description"
-      content="Beauty Clinic - премиальная косметологическая клиника в Санкт-Петербурге. Биовитализация, аугментация губ, чистка лица, массажи и другие процедуры."
+      content="Esteria — косметологический кабинет в Шлиссельбурге. Биоревитализация, аугментация губ, чистка лица, массаж лица, липолитики по телу и лицу, ботулинотерапия, коллаген и другие процедуры."
     />
+
+    <!-- Ключевые слова -->
     <meta
       name="keywords"
-      content="косметология, биовитализация, аугментация губ, чистка лица, массаж лица, Санкт-Петербург, косметолог"
+      content="косметология, биоревитализация, аугментация губ, чистка лица, массаж лица, липолитики, ботулинотерапия, коллаген, Шлиссельбург, косметолог"
     />
+
+    <!-- Разрешаем индексирование -->
     <meta name="robots" content="index, follow" />
-    <meta name="author" content="Beauty Clinic" />
+
+    <!-- Автор -->
+    <meta name="author" content="Esteria" />
+
+    <!-- Цвет темы для мобильных браузеров -->
     <meta name="theme-color" content="#10b981" />
 
-    <!-- Open Graph -->
+    <!-- Open Graph для соцсетей -->
     <meta
       property="og:title"
-      content="Esteria - Косметологическая клиника в Шлиссельбурге"
+      content="Esteria — косметологический кабинет в Шлиссельбурге"
     />
     <meta
       property="og:description"
-      content="Профессиональные косметологические процедуры в центре Санкт-Петербурга. Запись онлайн."
+      content="Профессиональные косметологические процедуры в центре Шлиссельбурга. Запись онлайн."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Beauty Clinic" />
+    <meta property="og:site_name" content="Esteria" />
     <meta property="og:locale" content="ru_RU" />
     <meta
       property="og:image"
@@ -35,89 +44,82 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Beauty Clinic - Косметологическая клиника в СПб"
-    />
-    <meta
-      name="twitter:description"
-      content="Профессиональные косметологические процедуры в центре Санкт-Петербурга. Запись онлайн."
-    />
-    <meta
-      name="twitter:image"
-      content="https://images.pexels.com/photos/3985263/pexels-photo-3985263.jpeg"
-    />
+    <!-- Геолокация для локального SEO -->
+    <meta name="geo.region" content="RU-LEN" />
+    <meta name="geo.placename" content="Шлиссельбург" />
+    <meta name="geo.position" content="59.9458;31.0115" />
+    <meta name="ICBM" content="59.9458, 31.0115" />
 
-    <!-- Local Business -->
-    <meta name="geo.region" content="RU-SPE" />
-    <meta name="geo.placename" content="Санкт-Петербург" />
-    <meta name="geo.position" content="59.9311;30.3141" />
-    <meta name="ICBM" content="59.9311, 30.3141" />
+    <!-- Favicon (замените на ваш, если нужно) -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
     <!-- Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "MedicalBusiness",
-        "name": "Beauty Clinic",
-        "description": "Премиальная косметологическая клиника в Санкт-Петербурге, специализирующаяся на биовитализации, аугментации губ, чистках лица и других косметологических процедурах.",
-        "url": "https://beautyclinic.ru",
-        "telephone": "+78123456789",
-        "email": "info@beautyclinic.ru",
-        "priceRange": "$$",
+        "name": "Esteria",
+        "description": "Косметологический кабинет в Шлиссельбурге...",
+        "url": "https://example.com",
+        "telephone": "+7-965-788-7750",
+        "email": "marianna.esteria@mail.ru",
+        "priceRange": "700-15000 рублей",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Невский проспект, 100",
-          "addressLocality": "Санкт-Петербург",
-          "postalCode": "191025",
+          "streetAddress": "ул. Чекалова, 10",
+          "addressLocality": "Шлиссельбург",
+          "postalCode": "187320",
           "addressCountry": "RU"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday"
-          ],
-          "opens": "09:00",
-          "closes": "20:00"
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 59.9458,
+          "longitude": 31.0115
         },
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Косметологические услуги",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "itemOffered": { "@type": "Service", "name": "Биовитализация" }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": { "@type": "Service", "name": "Аугментация губ" }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": { "@type": "Service", "name": "Чистка лица" }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": { "@type": "Service", "name": "Массаж лица" }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": { "@type": "Service", "name": "RF-лифтинг" }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": { "@type": "Service", "name": "Пилинги" }
-            }
-          ]
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+7-965-788-7750",
+          "contactType": "customer service",
+          "availableLanguage": ["Russian"],
+          "hoursAvailable": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "opens": "09:00",
+            "closes": "20:00"
+          }
         },
+        "sameAs": [
+          "https://www.instagram.com/esteria",
+          "https://vk.com/esteria"
+        ],
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "opens": "09:00",
+            "closes": "20:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Sunday"],
+            "opens": "10:00",
+            "closes": "18:00"
+          }
+        ],
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "4.9",

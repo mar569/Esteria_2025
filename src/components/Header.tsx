@@ -162,11 +162,11 @@ const Header = () => {
               );
             })}
             <motion.a
-              href="tel:+78123456789"
+              href="tel:+79657887750"
               className="flex items-center space-x-2 pt-6 border-t border-gray-300 text-gray-700 hover:text-mint-500 transition-colors"
             >
               <Phone size={18} />
-              <span>+7 (812) 345-67-89</span>
+              <span>+7 (965) 788-77-50</span>
             </motion.a>
           </motion.nav>
         )}

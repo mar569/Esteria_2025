@@ -2,12 +2,15 @@ import { useState, lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
 import PageLayout from './components/PageLayout';
+import ScrollToTopButton from './components/ScrollToTopButton';
 
 
-// Ленивый импорт компонентов
+
+
 const Hero = lazy(() => import('./components/Hero'));
 const Services = lazy(() => import('./components/serviceCard/Services'));
 const About = lazy(() => import('./components/About'));
+const Gallery = lazy(() => import('./components/Gallery'));
 const Appointment = lazy(() => import('./components/Appointment'));
 const Reviews = lazy(() => import('./components/Reviews'));
 const Blog = lazy(() => import('./components/Blog'));
@@ -40,11 +43,11 @@ function App() {
                 <Hero />
                 <Services onSelectService={openAppointmentWithService} />
                 <About onConsultationClick={() => openAppointmentWithService('Консультация косметолога')} />
+                <Gallery />
                 <Appointment selectedService={selectedServiceForAppointment} />
                 <Reviews />
                 <Blog />
                 <Contact />
-
                 <Footer />
               </>
             }
@@ -53,6 +56,7 @@ function App() {
           <Route path="/blog/:id" element={<ArticlePage />} />
         </Routes>
       </Suspense>
+      <ScrollToTopButton />
     </PageLayout>
   );
 }
