@@ -1,6 +1,4 @@
-
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import React, { useEffect } from 'react';
 
 interface SEOHeadProps {
   title: string;
@@ -49,7 +47,6 @@ const structuredData = {
     }
   },
   "sameAs": [
-
     "https://vk.com/esterum_cosmo"
   ],
   "openingHoursSpecification": [
@@ -80,47 +77,85 @@ const structuredData = {
   }
 };
 
-const SEOHead: React.FC<SEOHeadProps> = ({ title, description, url }) => (
-  <Helmet>
-    <title>{title}</title>
+const SEOHead: React.FC<SEOHeadProps> = ({ title, description, url }) => {
+  useEffect(() => {
 
-    <meta charSet="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <meta
-      name="keywords"
-      content="косметология, биоревитализация, аугментация губ, чистка лица, массаж лица, липолитики, ботулинотерапия, коллаген, Шлиссельбург, косметолог"
-    />
-    <meta name="robots" content="index, follow" />
-    <meta name="author" content="Esteria" />
-    <meta name="theme-color" content="#10b981" />
-    <link rel="canonical" href={url} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Esteria" />
-    <meta property="og:locale" content="ru_RU" />
-    <meta
-      property="og:image"
-      content="../assets/interior/interior-1.jpg"
-    />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    document.title = title;
+
+    const setMetaTag = (name: string, content: string, property?: string) => {
+      let element = document.querySelector(`meta[${property ? `property="${property}"` : `name="${name}"`}]`) as HTMLMetaElement;
+      if (!element) {
+        element = document.createElement('meta');
+        if (property) {
+          element.setAttribute('property', property);
+        } else {
+          element.setAttribute('name', name);
+        }
+        document.head.appendChild(element);
+      }
+      element.setAttribute('content', content);
+    };
+
+    const setLinkTag = (rel: string, href: string, type?: string) => {
+      let element = document.querySelector(`link[rel="${rel}"]`) as HTMLLinkElement;
+      if (!element) {
+        element = document.createElement('link');
+        element.setAttribute('rel', rel);
+        document.head.appendChild(element);
+      }
+      element.setAttribute('href', href);
+      if (type) element.setAttribute('type', type);
+    };
+
+    const setScriptTag = (type: string, content: string) => {
+      let element = document.querySelector(`script[type="${type}"]`) as HTMLScriptElement;
+      if (!element) {
+        element = document.createElement('script');
+        element.setAttribute('type', type);
+        document.head.appendChild(element);
+      }
+      element.textContent = content;
+    };
+
+    // Добавляем мета-теги
+    setMetaTag('charset', 'UTF-8');
+    setMetaTag('viewport', 'width=device-width, initial-scale=1');
+    setMetaTag('description', description);
+    setMetaTag('keywords', 'косметология, биоревитализация, аугментация губ, чистка лица, массаж лица, липолитики, ботулинотерапия, коллаген, Шлиссельбург, косметолог');
+    setMetaTag('robots', 'index, follow');
+    setMetaTag('author', 'Esteria');
+    setMetaTag('theme-color', '#10b981');
+
+    // Open Graph мета-теги
+    setMetaTag('og:title', title, 'og:title');
+    setMetaTag('og:description', description, 'og:description');
+    setMetaTag('og:type', 'website', 'og:type');
+    setMetaTag('og:site_name', 'Esteria', 'og:site_name');
+    setMetaTag('og:locale', 'ru_RU', 'og:locale');
+    setMetaTag('og:image', '../assets/interior/interior-1.jpg', 'og:image');
+    setMetaTag('og:image:width', '1200', 'og:image:width');
+    setMetaTag('og:image:height', '630', 'og:image:height');
 
 
-    <meta name="geo.region" content="RU-LEN" />
-    <meta name="geo.placename" content="Шлиссельбург" />
-    <meta name="geo.position" content="59.9458;31.0115" />
-    <meta name="ICBM" content="59.9458, 31.0115" />
+    setMetaTag('geo.region', 'RU-LEN');
+    setMetaTag('geo.placename', 'Шлиссельбург');
+    setMetaTag('geo.position', '59.9458;31.0115');
+    setMetaTag('ICBM', '59.9458, 31.0115');
 
 
-    <link rel="icon" href="/logo.png" type="image/x-icon" />
+    setLinkTag('canonical', url);
+    setLinkTag('icon', '/logo.png', 'image/x-icon');
 
 
-    <script type="application/ld+json">
-      {JSON.stringify(structuredData)}
-    </script>
-  </Helmet>
-);
+    setScriptTag('application/ld+json', JSON.stringify(structuredData));
+
+
+    return () => {
+
+    };
+  }, [title, description, url]);
+
+  return null;
+};
 
 export default SEOHead;

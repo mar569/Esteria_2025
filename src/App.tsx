@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
+
 
 import PageLayout from './components/PageLayout';
 
@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage';
 import ArticlePage from './pages/ArticlePage';
 import AllReviewsPage from './pages/AllReviewsPage';
 import { ServiceProvider } from './components/context/ServiceContext';
+import ErrorBoundary from './ErrorBoundary';
 
 const Blog = lazy(() => import('./components/Blog'));
 
@@ -40,7 +41,7 @@ function App() {
 
   return (
     <div className="background-wrapper min-h-screen parallax-container">
-      <HelmetProvider>
+      <ErrorBoundary>
         <ServiceProvider>
           <PageLayout hideHeader={hideHeader}>
             <SEOHead
@@ -59,7 +60,7 @@ function App() {
             </Suspense>
           </PageLayout>
         </ServiceProvider>
-      </HelmetProvider>
+      </ErrorBoundary>
     </div>
   );
 }
