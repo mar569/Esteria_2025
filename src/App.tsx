@@ -1,63 +1,66 @@
-import { useState, lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
 import PageLayout from './components/PageLayout';
-import ScrollToTopButton from './components/ScrollToTopButton';
 
+import SEOHead from './components/SEOHead';
+import NotFoundPage from './components/NotFoundPage';
+import HomePage from './pages/HomePage';
+import ArticlePage from './pages/ArticlePage';
+import AllReviewsPage from './pages/AllReviewsPage';
+import { ServiceProvider } from './components/context/ServiceContext';
 
-
-
-const Hero = lazy(() => import('./components/Hero'));
-const Services = lazy(() => import('./components/serviceCard/Services'));
-const About = lazy(() => import('./components/About'));
-const Gallery = lazy(() => import('./components/Gallery'));
-const Appointment = lazy(() => import('./components/Appointment'));
-const Reviews = lazy(() => import('./components/Reviews'));
 const Blog = lazy(() => import('./components/Blog'));
-const Contact = lazy(() => import('./components/Contact'));
-const ArticlePage = lazy(() => import('./pages/ArticlePage'));
-const Footer = lazy(() => import('./components/Footer'));
 
 function App() {
-  const [selectedServiceForAppointment, setSelectedServiceForAppointment] = useState('');
   const location = useLocation();
+  const hideHeader = location.pathname !== '/';
 
-  const openAppointmentWithService = (service: string) => {
-    setSelectedServiceForAppointment(service);
-    const appointmentSection = document.getElementById('appointment');
-    if (appointmentSection) {
-      appointmentSection.scrollIntoView({ behavior: 'smooth' });
-    }
+  const seoData = {
+    '/': {
+      title: 'Esteria - Косметологический кабинет в Шлиссельбурге',
+      description:
+        'Esteria — косметологический кабинет в Шлиссельбурге. Биоревитализация, аугментация губ, чистка лица, массаж лица, липолитики по телу и лицу, ботулинотерапия, коллаген и другие процедуры.',
+      url: 'https://esteriacosmo.ru',
+    },
+    '/reviews': {
+      title: 'Все отзывы - Esteria',
+      description: 'Полный список отзывов клиентов Esteria.',
+      url: 'https://esteriacosmo.ru/reviews',
+    },
+    '/blog': {
+      title: 'Блог о косметологии - Esteria',
+      description: 'Статьи и советы по косметологии, уходу за кожей и процедурам в Esteria.',
+      url: 'https://esteriacosmo.ru/blog',
+    },
   };
 
-  const hideHeader = location.pathname.startsWith('/blog/') && location.pathname !== '/blog';
+  const currentSEO = seoData[location.pathname as keyof typeof seoData] || seoData['/'];
 
   return (
-    <PageLayout hideHeader={hideHeader}>
-      <Suspense fallback={<div className='spinner_suspense'></div>}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Hero />
-                <Services onSelectService={openAppointmentWithService} />
-                <About onConsultationClick={() => openAppointmentWithService('Консультация косметолога')} />
-                <Gallery />
-                <Appointment selectedService={selectedServiceForAppointment} />
-                <Reviews />
-                <Blog />
-                <Contact />
-                <Footer />
-              </>
-            }
-          />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:id" element={<ArticlePage />} />
-        </Routes>
-      </Suspense>
-      <ScrollToTopButton />
-    </PageLayout>
+    <div className="background-wrapper min-h-screen parallax-container">
+      <HelmetProvider>
+        <ServiceProvider>
+          <PageLayout hideHeader={hideHeader}>
+            <SEOHead
+              title={currentSEO.title}
+              description={currentSEO.description}
+              url={currentSEO.url}
+            />
+            <Suspense fallback={<div className="spinner_suspense"></div>}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/reviews" element={<AllReviewsPage />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:id" element={<ArticlePage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </Suspense>
+          </PageLayout>
+        </ServiceProvider>
+      </HelmetProvider>
+    </div>
   );
 }
 

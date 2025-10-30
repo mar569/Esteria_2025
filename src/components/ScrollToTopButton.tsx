@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { IoArrowUp } from 'react-icons/io5';
+import { smoothScrollTo } from '../utils/smoothScroll';
 
 const ScrollToTopButton: React.FC = () => {
     const [showScrollTop, setShowScrollTop] = useState(false);
@@ -13,7 +14,7 @@ const ScrollToTopButton: React.FC = () => {
     };
 
     const handleScrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        smoothScrollTo('#hero',);
     };
 
     useEffect(() => {
@@ -23,14 +24,14 @@ const ScrollToTopButton: React.FC = () => {
 
     return (
         <button
-            className={`scroll-to-top-btn cursor-pointer rounded-full  shadow-lg relative ${showScrollTop ? 'showed' : ''
+            className={`scroll-to-top-btn cursor-pointer rounded-full shadow-lg relative ${showScrollTop ? 'showed' : ''
                 }`}
             aria-label="scroll top"
             type="button"
             onClick={handleScrollToTop}
-            style={{ width: 48, height: 48 }}
+            style={{ width: 40, height: 40 }}
         >
-            <IoArrowUp size={28} className="text-[#03aa72] w-full" />
+            <IoArrowUp size={24} className="text-[#03aa72] w-full" />
         </button>
     );
 };

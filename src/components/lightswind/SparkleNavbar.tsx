@@ -1,10 +1,11 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
 import { gsap } from "gsap";
 
 interface SparkleNavbarProps {
-    items: string[];
-    color?: string;
-    onItemClick?: (index: number) => void;
+  items: string[];
+  color?: string;
+  onItemClick?: (index: number) => void;
+  activeIndex?: number;
 }
 
 /**
@@ -15,20 +16,22 @@ interface SparkleNavbarProps {
  * @returns {JSX.Element} The rendered navigation menu.
  */
 const SparkleNavbar: React.FC<SparkleNavbarProps> = ({
-    items,
-    color = "#00fffc",
-    onItemClick, // <-- обязательно деструктурируем onItemClick здесь
+  items,
+  color = "#00fffc",
+  onItemClick,
+  activeIndex: externalActiveIndex,
 }) => {
-    const [activeIndex, setActiveIndex] = useState(0);
+  const [internalActiveIndex, setInternalActiveIndex] = useState(0);
+  const activeIndex = externalActiveIndex !== undefined ? externalActiveIndex : internalActiveIndex;
 
-    // Refs для доступа к DOM элементам
-    const navRef = useRef<HTMLDivElement>(null);
-    const activeElementRef = useRef<HTMLDivElement>(null);
-    const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-    // Функция для создания SVG внутри активного элемента
-    const createSVG = (element: HTMLDivElement) => {
-        element.innerHTML = `
+  const navRef = useRef<HTMLDivElement>(null);
+  const activeElementRef = useRef<HTMLDivElement>(null);
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+
+  const createSVG = (element: HTMLDivElement) => {
+    element.innerHTML = `
       <svg viewBox="0 0 116 5" preserveAspectRatio="none" class="beam">
         <path d="M0.5 2.5L113 0.534929C114.099 0.515738 115 1.40113 115 2.5C115 3.59887 114.099 4.48426 113 4.46507L0.5 2.5Z" fill="url(#gradient-beam)"/>
         <defs>
@@ -46,122 +49,134 @@ const SparkleNavbar: React.FC<SparkleNavbarProps> = ({
         </svg>
       </div>
     `;
-    };
+  };
 
-    // Вычисляем смещение по горизонтали для активного элемента
-    const getOffsetLeft = (element: HTMLButtonElement) => {
-        if (!navRef.current || !activeElementRef.current) return 0;
-        const elementRect = element.getBoundingClientRect();
-        const navRect = navRef.current.getBoundingClientRect();
-        const activeElementWidth = activeElementRef.current.offsetWidth;
-        return (
-            elementRect.left -
-            navRect.left +
-            (elementRect.width - activeElementWidth) / 2
-        );
-    };
-
-    // Устанавливаем начальное положение активного элемента до первого рендера
-    useLayoutEffect(() => {
-        const activeButton = buttonRefs.current[activeIndex];
-        if (navRef.current && activeElementRef.current && activeButton) {
-            gsap.set(activeElementRef.current, {
-                x: getOffsetLeft(activeButton),
-            });
-            gsap.to(activeElementRef.current, {
-                "--active-element-show": "1",
-                duration: 0.2,
-            });
-        }
-    }, []);
-
-    // Обработка клика по пункту меню
-    const handleClick = (index: number) => {
-        const navElement = navRef.current;
-        const activeElement = activeElementRef.current;
-        const oldButton = buttonRefs.current[activeIndex];
-        const newButton = buttonRefs.current[index];
-
-        if (
-            index === activeIndex ||
-            !navElement ||
-            !activeElement ||
-            !oldButton ||
-            !newButton
-        ) {
-            return;
-        }
-
-        const x = getOffsetLeft(newButton);
-        const direction = index > activeIndex ? "after" : "before";
-        const spacing = Math.abs(x - getOffsetLeft(oldButton));
-
-        navElement.classList.add(direction);
-
-        gsap.set(activeElement, {
-            rotateY: direction === "before" ? "180deg" : "0deg",
-        });
-
-        gsap.to(activeElement, {
-            keyframes: [
-                {
-                    "--active-element-width": `${spacing > navElement.offsetWidth - 60
-                            ? navElement.offsetWidth - 60
-                            : spacing
-                        }px`,
-                    duration: 0.3,
-                    ease: "none",
-                    onStart: () => {
-                        createSVG(activeElement);
-                        gsap.to(activeElement, {
-                            "--active-element-opacity": 1,
-                            duration: 0.1,
-                        });
-                    },
-                },
-                {
-                    "--active-element-scale-x": "0",
-                    "--active-element-scale-y": ".25",
-                    "--active-element-width": "0px",
-                    duration: 0.3,
-                    onStart: () => {
-                        gsap.to(activeElement, {
-                            "--active-element-mask-position": "40%",
-                            duration: 0.5,
-                        });
-                        gsap.to(activeElement, {
-                            "--active-element-opacity": 0,
-                            delay: 0.45,
-                            duration: 0.25,
-                        });
-                    },
-                    onComplete: () => {
-                        activeElement.innerHTML = "";
-                        navElement.classList.remove("before", "after");
-                        gsap.set(activeElement, {
-                            x: getOffsetLeft(newButton),
-                            "--active-element-show": "1",
-                        });
-                        setActiveIndex(index);
-                        if (onItemClick) {
-                            onItemClick(index);
-                        }
-                    },
-                },
-            ],
-        });
-
-        gsap.to(activeElement, {
-            x,
-            "--active-element-strike-x": "-50%",
-            duration: 0.6,
-            ease: "none",
-        });
-    };
-
+  // Вычисляем смещение по горизонтали для активного элемента
+  const getOffsetLeft = (element: HTMLButtonElement) => {
+    if (!navRef.current || !activeElementRef.current) return 0;
+    const elementRect = element.getBoundingClientRect();
+    const navRect = navRef.current.getBoundingClientRect();
+    const activeElementWidth = activeElementRef.current.offsetWidth;
     return (
-        <>
-            <style>{`
+      elementRect.left -
+      navRect.left +
+      (elementRect.width - activeElementWidth) / 2
+    );
+  };
+
+  useLayoutEffect(() => {
+    const activeButton = buttonRefs.current[activeIndex];
+    if (navRef.current && activeElementRef.current && activeButton) {
+      gsap.set(activeElementRef.current, {
+        x: getOffsetLeft(activeButton),
+      });
+      gsap.to(activeElementRef.current, {
+        "--active-element-show": "1",
+        duration: 0.2,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    const activeButton = buttonRefs.current[activeIndex];
+    if (navRef.current && activeElementRef.current && activeButton) {
+      const x = getOffsetLeft(activeButton);
+      gsap.to(activeElementRef.current, {
+        x,
+        duration: 0.6,
+        ease: "none",
+      });
+    }
+  }, [activeIndex]);
+
+  const handleClick = (index: number) => {
+    const navElement = navRef.current;
+    const activeElement = activeElementRef.current;
+    const oldButton = buttonRefs.current[activeIndex];
+    const newButton = buttonRefs.current[index];
+
+    if (
+      index === activeIndex ||
+      !navElement ||
+      !activeElement ||
+      !oldButton ||
+      !newButton
+    ) {
+      return;
+    }
+
+    const x = getOffsetLeft(newButton);
+    const direction = index > activeIndex ? "after" : "before";
+    const spacing = Math.abs(x - getOffsetLeft(oldButton));
+
+    navElement.classList.add(direction);
+
+    gsap.set(activeElement, {
+      rotateY: direction === "before" ? "180deg" : "0deg",
+    });
+
+    gsap.to(activeElement, {
+      keyframes: [
+        {
+          "--active-element-width": `${spacing > navElement.offsetWidth - 60
+            ? navElement.offsetWidth - 60
+            : spacing
+            }px`,
+          duration: 0.3,
+          ease: "none",
+          onStart: () => {
+            createSVG(activeElement);
+            gsap.to(activeElement, {
+              "--active-element-opacity": 1,
+              duration: 0.9,
+            });
+          },
+        },
+        {
+          "--active-element-scale-x": "0",
+          "--active-element-scale-y": ".25",
+          "--active-element-width": "0px",
+          duration: 0.9,
+          onStart: () => {
+            gsap.to(activeElement, {
+              "--active-element-mask-position": "40%",
+              duration: 0.5,
+            });
+            gsap.to(activeElement, {
+              "--active-element-opacity": 0,
+              delay: 0.45,
+              duration: 0.25,
+            });
+          },
+          onComplete: () => {
+            activeElement.innerHTML = "";
+            navElement.classList.remove("before", "after");
+            gsap.set(activeElement, {
+              x: getOffsetLeft(newButton),
+              "--active-element-show": "1",
+            });
+            if (externalActiveIndex === undefined) {
+              setInternalActiveIndex(index); // <-- Обновляем внутренний только если нет внешнего
+            }
+            if (onItemClick) {
+              onItemClick(index);
+            }
+          },
+        },
+      ],
+    });
+
+    gsap.to(activeElement, {
+      x,
+      "--active-element-strike-x": "-50%",
+      duration: 0.6,
+      ease: "none",
+    });
+  };
+
+  return (
+    <>
+      <style>{`
         .navigation-menu {
           margin: 20px 0px;
           position: relative;
@@ -261,25 +276,25 @@ const SparkleNavbar: React.FC<SparkleNavbarProps> = ({
         }
       `}</style>
 
-            <nav className="navigation-menu" ref={navRef}>
-                <ul>
-                    {items.map((item, index) => (
-                        <li key={item} className={index === activeIndex ? "active" : ""}>
-                            <button
-                                ref={(el) => {
-                                    buttonRefs.current[index] = el;
-                                }}
-                                onClick={() => handleClick(index)}
-                            >
-                                {item}
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-                <div className="active-element" ref={activeElementRef} />
-            </nav>
-        </>
-    );
+      <nav className="navigation-menu" ref={navRef}>
+        <ul>
+          {items.map((item, index) => (
+            <li key={item} className={index === activeIndex ? "active" : ""}>
+              <button
+                ref={(el) => {
+                  buttonRefs.current[index] = el;
+                }}
+                onClick={() => handleClick(index)}
+              >
+                {item}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <div className="active-element" ref={activeElementRef} />
+      </nav>
+    </>
+  );
 };
 
 export default SparkleNavbar;
