@@ -114,7 +114,7 @@ const WhyMeAndQuestions: React.FC = () => {
                             <div
                                 className="absolute bottom-24 right-[-7.4rem] font-bold text-3xl drop-shadow-2xl z-20 leading-none"
                                 style={{
-                                    background: 'linear-gradient(145deg, #808080, #1A1A1A, #ADADAD, #522D2F)',
+                                    background: 'linear-gradient(145deg, #ADADAD, #1A1A1A, #ADADAD, #522D2F)',
                                     WebkitBackgroundClip: 'text',
                                     WebkitTextFillColor: 'transparent',
                                     backgroundClip: 'text',

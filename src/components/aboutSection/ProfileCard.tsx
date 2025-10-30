@@ -5,7 +5,7 @@ import me from '../../assets/me.png';
 const ProfileCard: React.FC = () => {
     return (
         <div
-            className="pc-card-wrapper"
+            className="pc-card-wrapper flex justify-center items-center"
         >
             <section className="pc-card">
                 <div className="pc-inside">

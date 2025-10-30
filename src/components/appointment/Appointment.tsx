@@ -65,7 +65,7 @@ const Appointment = forwardRef<HTMLElement>((_props, ref) => {
   return (
     <section
       id="appointment"
-      className="px-4 sm:px-6 lg:px-8 flex items-center justify-center h-full min-h-[702px] relative"
+      className="px-4 sm:px-6 lg:px-8 flex items-center justify-center h-full min-h-[702px] relative scrollbar-hide"
       ref={ref}
       data-parallax-speed="0.4"
       style={{ touchAction: 'pan-y pinch-zoom' }}

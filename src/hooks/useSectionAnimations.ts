@@ -127,9 +127,9 @@ export const useSectionAnimations = ({
 
     animateSection(aboutRef, { y: 150 }, { y: 0 }, true);
     animateSection(servicesRef, { x: 50 }, { x: -5 });
-    animateSection(whymeRef, { x: -20 }, { x: 0 });
-    animateSection(contactRef, { x: -50 }, { x: 10 });
-    animateSection(galleryRef, { x: -50 }, { x: 10 });
+    animateSection(whymeRef, { x: -20 }, { x: 5 });
+    animateSection(contactRef, { x: -40 }, { x: 10 });
+    animateSection(galleryRef, { x: -40 }, { x: 10 });
     animateSection(reviewsRef, { x: -50 }, { x: 10 });
     animateSection(appointmentRef, { x: 100 }, { x: -10 });
     animateSection(blogRef, { scale: 0.9 }, { scale: 1 });

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Droplets, Leaf, Sparkles, Syringe } from 'lucide-react'; // Иконки для категорий
+import { motion, AnimatePresence, easeOut } from 'framer-motion';
+import { ChevronDown, Droplets, Leaf, Sparkles, Syringe } from 'lucide-react';
 import { smoothScrollTo } from '../../utils/smoothScroll';
 import servicesData from '../../utils/servicesData';
 
@@ -11,7 +11,7 @@ interface ServicesAccordionProps {
 }
 
 const fadeUpVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: () => ({
         opacity: 1,
         y: 0,
@@ -19,7 +19,7 @@ const fadeUpVariants = {
 };
 
 const getDelay = (customIndex: number, categoryTrigger: number, customOffset: number) => {
-    return (customIndex + categoryTrigger + customOffset) * 0.1 + (categoryTrigger * 0.2);
+    return (customIndex + categoryTrigger + customOffset) * 0.05 + (categoryTrigger * 0.1); // Уменьшил задержки для мобильных
 };
 
 const categoryIcons = {
@@ -38,7 +38,6 @@ const categories = [
                 name: service.title,
                 price: service.price,
                 duration: service.duration,
-
             })),
     },
     {
@@ -49,7 +48,6 @@ const categories = [
                 name: service.title,
                 price: service.price,
                 duration: service.duration,
-
             })),
     },
     {
@@ -60,7 +58,6 @@ const categories = [
                 name: service.title,
                 price: service.price,
                 duration: service.duration,
-
             })),
     },
     {
@@ -71,7 +68,6 @@ const categories = [
                 name: service.title,
                 price: service.price,
                 duration: service.duration,
-
             })),
     },
 ];
@@ -84,13 +80,13 @@ const ServicesAccordion: React.FC<ServicesAccordionProps> = ({ onSelectService, 
     };
 
     return (
-        <div className="max-w-4xl mx-auto space-y-4 md:space-y-6 ">
+        <div className="max-w-4xl mx-auto space-y-4 md:space-y-6">
             {categories.map((category, index) => (
                 <React.Fragment key={category.title}>
                     {index > 0 && <hr className="border-t border-gray-600 my-2 md:my-4" />}
 
                     <motion.div
-                        className="rounded-xl md:rounded-2xl p-6 lg:p-8 card border border-mint-500/20 hover:shadow-xl hover:border-mint-500/40 transition-all duration-500 transform hover:-translate-y-1"
+                        className="rounded-xl md:rounded-2xl p-6 lg:p-8 card border border-mint-500/20 hover:shadow-xl hover:border-mint-500/40 transition-all duration-300 transform hover:-translate-y-1"
                         variants={fadeUpVariants}
                         initial="hidden"
                         animate="visible"
@@ -98,13 +94,13 @@ const ServicesAccordion: React.FC<ServicesAccordionProps> = ({ onSelectService, 
                         transition={{
                             type: "spring",
                             stiffness: 300,
-                            damping: 20,
+                            damping: 50,
                             duration: 0.6,
-                            ease: "easeInOut",
+                            ease: easeOut,
                             delay: getDelay(customIndex, categoryTrigger, index),
                         }}
+                        style={{ willChange: 'transform, opacity' }} // Добавил willChange для производительности
                     >
-
                         <button
                             onClick={() => toggleCategory(category.title)}
                             className="w-full flex items-center justify-between text-left group mb-4 md:mb-6"
@@ -112,13 +108,13 @@ const ServicesAccordion: React.FC<ServicesAccordionProps> = ({ onSelectService, 
                         >
                             <div className="flex items-center space-x-3 md:space-x-4">
                                 {categoryIcons[category.title as keyof typeof categoryIcons]}
-                                <h3 className="text-xl md:text-2xl lg:text-4xl font-bold font-serif text-gray-100 group-hover:text-mint-500 transition-colors duration-700">
+                                <h3 className="text-xl md:text-2xl lg:text-4xl font-bold font-serif text-gray-100 group-hover:text-mint-500 transition-colors duration-300">
                                     {category.title}
                                 </h3>
                             </div>
                             <motion.div
                                 animate={{ rotate: openCategory === category.title ? 180 : 0 }}
-                                transition={{ duration: 0.3 }}
+                                transition={{ duration: 0.2 }} // Уменьшил duration для иконки
                             >
                                 <ChevronDown className="text-mint-500 hover:text-mint-300 transition-colors" size={20} />
                             </motion.div>
@@ -127,31 +123,31 @@ const ServicesAccordion: React.FC<ServicesAccordionProps> = ({ onSelectService, 
                         <AnimatePresence>
                             {openCategory === category.title && (
                                 <motion.div
-                                    initial={{ height: 0, opacity: 0 }}
-                                    animate={{ height: 'auto', opacity: 1 }}
-                                    exit={{ height: 0, opacity: 0 }}
-                                    transition={{ duration: 0.4, ease: 'easeInOut' }}
-                                    className="space-y-3 md:space-y-4"
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -10 }}
+                                    transition={{ duration: 0.3, ease: 'easeOut' }} // Изменил на opacity и y вместо height для лучшей производительности
+                                    className="space-y-3 md:space-y-4 overflow-hidden"
                                 >
                                     {category.services.map((service, subIndex) => (
                                         <motion.div
                                             key={service.name}
-                                            className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 md:p-5 rounded-xl border border-mint-500/20 hover:bg-mint-500/10 hover:shadow-lg transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5"
+                                            className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 md:p-5 rounded-xl border border-mint-500/20 hover:bg-mint-500/10 hover:shadow-lg transition-all duration-200 transform hover:scale-105 hover:-translate-y-0.5"
                                             variants={fadeUpVariants}
                                             initial="hidden"
                                             animate="visible"
                                             custom={customIndex + categoryTrigger + index + subIndex + 1}
                                             transition={{
                                                 type: "spring",
-                                                stiffness: 300,
-                                                damping: 20,
-                                                duration: 0.6,
-                                                ease: "easeInOut",
+                                                stiffness: 400,
+                                                damping: 30,
+                                                duration: 0.4,
+                                                ease: "easeOut",
                                                 delay: getDelay(customIndex, categoryTrigger, index + subIndex + 1),
                                             }}
+                                            style={{ willChange: 'transform, opacity' }}
                                         >
-                                            <div className="flex items-center space-x-3 mb-3 sm:mb-0"> {/* Добавил mb для мобильных, когда flex-col */}
-
+                                            <div className="flex items-center space-x-3 mb-3 sm:mb-0">
                                                 <div>
                                                     <h4 className="text-base md:text-lg font-semibold text-gray-100">{service.name}</h4>
                                                     <p className="text-xs md:text-sm text-gray-400 font-medium">{service.price} • {service.duration}</p>
@@ -170,7 +166,7 @@ const ServicesAccordion: React.FC<ServicesAccordionProps> = ({ onSelectService, 
                                                         #016238 100%
                                                     )`,
                                                 }}
-                                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 md:px-6 md:py-3 text-white font-bold rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-110 active:scale-95"
+                                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 md:px-6 md:py-3 text-white font-bold rounded-full hover:shadow-xl transition-all duration-200 transform hover:scale-105 active:scale-95"
                                             >
                                                 Записаться
                                             </button>

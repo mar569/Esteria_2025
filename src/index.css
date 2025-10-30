@@ -9,7 +9,6 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   height: auto;
-
   touch-action: pan-y pinch-zoom;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: auto;
@@ -617,7 +616,8 @@ body {
   border-radius: 20px;
   position: relative;
   background-blend-mode: normal;
-  box-shadow: 0 10px 30px rgba(124, 128, 126, 0.232);
+  box-shadow: 0 10px 30px rgba(124, 128, 126, 0.232) inset,
+    10px -1px 30px rgba(178, 143, 198, 0.404);
   transition: transform 0.3s ease;
   transform: translate3d(0, 0, 0.1px);
   background-size: 100% 100%;
@@ -693,7 +693,7 @@ body {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: clamp(16px, 6vw, 50px);
-  padding: clamp(10px, 3vw, 16px) clamp(12px, 4vw, 18px);
+  padding: 10px clamp(16px, 5vw, 24px);
   pointer-events: auto;
 }
 
@@ -723,7 +723,7 @@ body {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  gap: clamp(12px, 3vw, 4px);
+  gap: 10px;
 }
 
 .pc-handle {
@@ -743,12 +743,14 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: clamp(10px, 4vw, 50px);
   padding: clamp(4px, 2vw, 8px) clamp(12px, 4vw, 20px);
-  font-size: clamp(10px, 3vw, 16px);
+  font-size: 14px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.9);
   cursor: pointer;
   transition: all 0.2s ease;
   backdrop-filter: blur(10px);
+  box-shadow: 10px 10px 20px rgba(109, 79, 123, 0.669) inset -10px -10px 20px
+    rgba(0, 0, 0, 0.8);
 }
 
 .pc-contact-btn:hover {
@@ -1054,5 +1056,38 @@ body {
     width: 30px;
     height: 30px;
     font-size: 18px;
+  }
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #025f42;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #016238;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #025f42 transparent;
   }
 }

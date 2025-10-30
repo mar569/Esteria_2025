@@ -1,7 +1,7 @@
-// components/reviews/ReviewsCarousel.tsx
+
 import { useEffect, useState, useRef } from 'react';
 import { motion, useMotionValue, PanInfo, Transition } from 'framer-motion';
-import ReviewCard from '../animate/ReviewCard'; // Ваш ReviewCard
+import ReviewCard from '../animate/ReviewCard';
 import { Review } from '../../utils/reviewsData';
 
 const DRAG_BUFFER = 50;
@@ -101,10 +101,10 @@ export default function ReviewsCarousel({
             className="carousel-container"
             style={{
                 width: '100%',
-                height: '500px', // Адаптируйте под ReviewCard
+                height: '500px',
                 position: 'relative',
                 overflow: 'hidden',
-                padding: '16px 0',
+
             }}
         >
             <motion.div

@@ -61,7 +61,7 @@ const FaqAccordion: React.FC = () => {
                             <motion.div
                                 className="flex-shrink-0 mr-4"
                                 animate={{ rotate: activeIndex === index ? 180 : 0 }}
-                                transition={{ duration: 0.3 }}
+                                transition={{ duration: 0.8 }}
                             >
                                 {activeIndex === index ? (
                                     <FaMinus className="text-black/80 text-xl" />
