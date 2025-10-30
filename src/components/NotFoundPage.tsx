@@ -1,8 +1,9 @@
-// components/NotFoundPage.tsx
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import cat from '../assets/cat.jpg';
-import { Helmet } from 'react-helmet-async'; // Или 'react-helmet', если используете обычный
+import { Helmet } from '@dr.pogodin/react-helmet';
+
 
 const NotFoundPage: React.FC = () => {
     return (

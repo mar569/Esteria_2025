@@ -11,6 +11,7 @@
     "postinstall": "npx update-browserslist-db@latest && npx browserslist --update-db"
   },
   "dependencies": {
+    "@dr.pogodin/react-helmet": "^3.0.4",
     "@fontsource/inter": "^5.2.6",
     "@tailwindcss/vite": "^4.1.14",
     "framer-motion": "^12.23.12",
