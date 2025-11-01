@@ -43,7 +43,8 @@ export const useSectionAnimations = ({
       toProps: any,
       staggerChildren: boolean = false,
       start: string = 'top 85%',
-      end: string = 'bottom 15%'
+      end: string = 'bottom 15%',
+      customEase: string = 'power2.out'
     ) => {
       if (ref?.current) {
         gsap.set(ref.current, fromProps);
@@ -53,18 +54,19 @@ export const useSectionAnimations = ({
             trigger: ref.current,
             start,
             end,
-            scrub: 1.5,
+            scrub: 2.5,
             toggleActions: 'play none none none',
             fastScrollEnd: true,
             invalidateOnRefresh: true,
             preventOverlaps: true,
+            markers: false,
           },
         });
 
         tl.to(ref.current, {
           ...toProps,
-          duration: 1.2,
-          ease: 'power2.out',
+          duration: 1.5,
+          ease: customEase,
         });
 
         if (staggerChildren) {
@@ -76,9 +78,9 @@ export const useSectionAnimations = ({
                 opacity: 1,
                 y: 0,
                 scale: 1,
-                duration: 1.2,
-                stagger: 0.15,
-                ease: 'power2.out',
+                duration: 1.5,
+                stagger: 0.2,
+                ease: customEase,
               },
               '-=0.5'
             );
@@ -89,50 +91,62 @@ export const useSectionAnimations = ({
 
     if (heroRef.current) {
       gsap.set('.hero-bg', { y: 0, opacity: 1 });
-      gsap.to('.hero-bg', {
-        y: '30%',
-        opacity: 0.8,
+      gsap.set('.hero-title', { y: 0, opacity: 1 });
+
+      const heroTl = gsap.timeline({
         scrollTrigger: {
           trigger: heroRef.current,
           start: 'top top',
           end: 'bottom top',
-          scrub: 1.5,
+          scrub: 2.5,
           invalidateOnRefresh: true,
+          fastScrollEnd: true,
+          preventOverlaps: true,
         },
       });
 
-      gsap.to('.hero-title', {
-        y: '-60%',
-        opacity: 0,
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1.5,
-          invalidateOnRefresh: true,
-        },
-      });
+      heroTl
+        .to('.hero-bg', { y: '30%', opacity: 0.8, ease: 'power2.out' })
+        .to('.hero-title', { y: '-60%', opacity: 0, ease: 'power2.out' }, 0); // Синхронизировано
 
       gsap.to('.hero-bg', {
         opacity: 0,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: aboutRef.current,
           start: 'top 50%',
           end: 'top 20%',
-          scrub: 1.5,
+          scrub: 2.5,
           toggleActions: 'play none none reverse',
+          invalidateOnRefresh: true,
         },
       });
     }
 
-    animateSection(aboutRef, { y: 150 }, { y: 0 }, true);
-    animateSection(servicesRef, { x: 50 }, { x: -5 });
-    animateSection(whymeRef, { x: -20 }, { x: 5 });
-    animateSection(contactRef, { x: -40 }, { x: 10 });
-    animateSection(galleryRef, { x: -40 }, { x: 10 });
-    animateSection(reviewsRef, { x: -50 }, { x: 10 });
-    animateSection(appointmentRef, { x: 100 }, { x: -10 });
-    animateSection(blogRef, { scale: 0.9 }, { scale: 1 });
+    animateSection(
+      aboutRef,
+      { y: 100, opacity: 0 },
+      { y: 0, opacity: 1, scale: 1 },
+      true,
+      'top 90%',
+      'bottom 15%',
+      'power3.out'
+    );
+    animateSection(servicesRef, { x: 50, opacity: 0 }, { x: -5, opacity: 1 });
+    animateSection(whymeRef, { x: -20, opacity: 0 }, { x: 5, opacity: 1 });
+    animateSection(contactRef, { x: -40, opacity: 0 }, { x: 10, opacity: 1 });
+    animateSection(galleryRef, { x: -40, opacity: 0 }, { x: 10, opacity: 1 });
+    animateSection(reviewsRef, { x: -50, opacity: 0 }, { x: 10, opacity: 1 });
+    animateSection(
+      appointmentRef,
+      { x: 100, opacity: 0 },
+      { x: -10, opacity: 1 }
+    );
+    animateSection(
+      blogRef,
+      { scale: 0.9, opacity: 0 },
+      { scale: 1, opacity: 1 }
+    );
 
     if (contactRef.current) {
       gsap.to(contactRef.current, {
@@ -142,28 +156,26 @@ export const useSectionAnimations = ({
           trigger: contactRef.current,
           start: 'top right',
           end: 'bottom top',
-          scrub: 1.5,
+          scrub: 2.5,
           invalidateOnRefresh: true,
         },
       });
     }
 
     if (footerRef.current) {
-      gsap.set(footerRef.current, { zIndex: 10 });
-      gsap.fromTo(
-        footerRef.current,
-        { y: -100 },
-        {
-          y: 0,
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: 'top bottom',
-            end: 'top 20%',
-            scrub: 1.5,
-            invalidateOnRefresh: true,
-          },
-        }
-      );
+      gsap.set(footerRef.current, { zIndex: 10, y: -100, opacity: 0 });
+      gsap.to(footerRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: 'top bottom',
+          end: 'top 20%',
+          scrub: 2.5,
+          invalidateOnRefresh: true,
+        },
+      });
     }
 
     ScrollTrigger.refresh();

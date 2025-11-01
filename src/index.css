@@ -26,8 +26,6 @@ body {
   height: auto;
   touch-action: pan-y pinch-zoom;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior: auto;
-  scroll-behavior: smooth;
   color: white;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -1090,4 +1088,22 @@ body {
     scrollbar-width: thin;
     scrollbar-color: #025f42 transparent;
   }
+}
+
+.hero-bg,
+.animate-child,
+.pc-card,
+.pc-inside,
+.pc-avatar-content,
+.pc-user-info,
+.pc-content,
+.pc-details {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+body {
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; /* Для iOS */
 }
