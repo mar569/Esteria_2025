@@ -124,7 +124,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ title, description, url }) => {
     setMetaTag('keywords', 'косметология, биоревитализация, аугментация губ, чистка лица, массаж лица, липолитики, ботулинотерапия, коллаген, Шлиссельбург, косметолог');
     setMetaTag('robots', 'index, follow');
     setMetaTag('author', 'Esteria');
-    setMetaTag('theme-color', '#10b981');
+    setMetaTag('theme-color', '#122720');
 
     // Open Graph мета-теги
     setMetaTag('og:title', title, 'og:title');
@@ -132,7 +132,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ title, description, url }) => {
     setMetaTag('og:type', 'website', 'og:type');
     setMetaTag('og:site_name', 'Esteria', 'og:site_name');
     setMetaTag('og:locale', 'ru_RU', 'og:locale');
-    setMetaTag('og:image', '../assets/interior/interior-1.jpg', 'og:image');
+    setMetaTag('og:image', '../assets/interior/interior-2.jpg', 'og:image');
     setMetaTag('og:image:width', '1200', 'og:image:width');
     setMetaTag('og:image:height', '630', 'og:image:height');
 
