@@ -24,7 +24,7 @@ const NotFoundPage: React.FC = () => {
                         404
                     </h1>
                     <p className="text-lg text-gray-400 mb-8 opacity-0 fadeInUp animation-delay-1000 max-w-md mx-auto">
-                        Похоже, вы зашли не туда.
+                        Похоже, вы зашли не туда!
                     </p>
                     <Link
                         to="/"
