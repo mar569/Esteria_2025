@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Phone, Menu, X } from 'lucide-react';
 import SparkleNavbar from './lightswind/SparkleNavbar';
 import { useLocation } from 'react-router-dom';
-import { motion, AnimatePresence, } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../assets/logo.png';
 import { commonVariants } from '../utils/animations';
 
@@ -70,8 +70,6 @@ const Header = () => {
       el.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-
 
   return (
     <motion.header

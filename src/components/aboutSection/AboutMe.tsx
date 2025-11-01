@@ -13,7 +13,7 @@ const AboutMe: React.FC<AboutProps> = forwardRef<HTMLElement, AboutProps>((_, re
     return (
         <section
             id="about"
-            className="relative background-wrapper-about py-20"
+            className="relative  py-20"
             ref={ref}
             style={{ position: 'relative' }}
         >

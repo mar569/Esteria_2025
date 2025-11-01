@@ -30,11 +30,13 @@ export const useSectionAnimations = ({
   footerRef,
 }: UseSectionAnimationsProps) => {
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') return; // Исправлено: было ''
+
+    document.body.style.touchAction = 'pan-y';
 
     ScrollTrigger.config({
       autoRefreshEvents: 'visibilitychange,resize,orientationchange',
-      limitCallbacks: true,
+      limitCallbacks: false,
     });
 
     const animateSection = (
@@ -56,9 +58,8 @@ export const useSectionAnimations = ({
             end,
             scrub: 2.5,
             toggleActions: 'play none none none',
-            fastScrollEnd: true,
+            fastScrollEnd: false,
             invalidateOnRefresh: true,
-            preventOverlaps: true,
             markers: false,
           },
         });
@@ -90,8 +91,12 @@ export const useSectionAnimations = ({
     };
 
     if (heroRef.current) {
-      gsap.set('.hero-bg', { y: 0, opacity: 1 });
-      gsap.set('.hero-title', { y: 0, opacity: 1 });
+      gsap.set('.hero-bg', { y: 0, opacity: 1, willChange: 'opacity' });
+      gsap.set('.hero-title', {
+        y: 0,
+        opacity: 1,
+        willChange: 'transform, opacity',
+      });
 
       const heroTl = gsap.timeline({
         scrollTrigger: {
@@ -100,14 +105,14 @@ export const useSectionAnimations = ({
           end: 'bottom top',
           scrub: 2.5,
           invalidateOnRefresh: true,
-          fastScrollEnd: true,
-          preventOverlaps: true,
+          fastScrollEnd: false,
+          pinSpacing: false,
         },
       });
 
       heroTl
-        .to('.hero-bg', { y: '30%', opacity: 0.8, ease: 'power2.out' })
-        .to('.hero-title', { y: '-60%', opacity: 0, ease: 'power2.out' }, 0); // Синхронизировано
+        .to('.hero-bg', { opacity: 0.8, ease: 'power2.out' })
+        .to('.hero-title', { y: '-60%', opacity: 0, ease: 'power2.out' }, 0);
 
       gsap.to('.hero-bg', {
         opacity: 0,
@@ -119,19 +124,29 @@ export const useSectionAnimations = ({
           scrub: 2.5,
           toggleActions: 'play none none reverse',
           invalidateOnRefresh: true,
+          fastScrollEnd: false,
         },
       });
     }
 
-    animateSection(
-      aboutRef,
-      { y: 100, opacity: 0 },
-      { y: 0, opacity: 1, scale: 1 },
-      true,
-      'top 90%',
-      'bottom 15%',
-      'power3.out'
-    );
+    // AboutMe: Как в вашем основном коде (простой animateSection)
+    if (aboutRef.current) {
+      const mainHeader = aboutRef.current.querySelector(
+        '.main-header'
+      ) as HTMLElement;
+      if (mainHeader) mainHeader.setAttribute('data-speed', '0.75');
+
+      animateSection(
+        aboutRef,
+        { y: 100, opacity: 0 },
+        { y: 0, opacity: 1, scale: 1 },
+        true,
+        'top 90%',
+        'bottom 15%',
+        'power3.out'
+      );
+    }
+
     animateSection(servicesRef, { x: 50, opacity: 0 }, { x: -5, opacity: 1 });
     animateSection(whymeRef, { x: -20, opacity: 0 }, { x: 5, opacity: 1 });
     animateSection(contactRef, { x: -40, opacity: 0 }, { x: 10, opacity: 1 });
@@ -158,6 +173,7 @@ export const useSectionAnimations = ({
           end: 'bottom top',
           scrub: 2.5,
           invalidateOnRefresh: true,
+          fastScrollEnd: false,
         },
       });
     }
@@ -174,6 +190,7 @@ export const useSectionAnimations = ({
           end: 'top 20%',
           scrub: 2.5,
           invalidateOnRefresh: true,
+          fastScrollEnd: false,
         },
       });
     }
@@ -181,6 +198,7 @@ export const useSectionAnimations = ({
     ScrollTrigger.refresh();
 
     return () => {
+      document.body.style.touchAction = '';
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
