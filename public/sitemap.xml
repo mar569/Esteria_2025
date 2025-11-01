@@ -1,40 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Главная страница -->
   <url>
-    <loc>https://esteria.ru/</loc>
-    <lastmod>2025-09-02</lastmod>
+    <loc>https://esteriacosmo.ru/</loc>
+    <lastmod>2025-10-31</lastmod>
     <changefreq>monthly</changefreq>  
     <priority>0.8</priority>            
   </url>
 
-  <!-- Страница блога -->
+
   <url>
-    <loc>https://esteria.ru/blog</loc>
-    <lastmod>2025-09-02</lastmod>
+    <loc>https://esteriacosmo.ru/blog</loc>
+    <lastmod>2025-10-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Статьи блога -->
   <url>
-    <loc>https://esteria.ru/blog/biovitalizaciya</loc>
-    <lastmod>2025-08-28</lastmod>
+    <loc>https://esteriacosmo.ru/blog/biovitalizaciya</loc>
+    <lastmod>2025-10-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://esteria.ru/blog/uhod-za-kozhey-posle-chistki</loc>
-    <lastmod>2025-08-29</lastmod>
+    <loc>https://esteriacosmo.ru/blog/uhod-za-kozhey-posle-chistki</loc>
+    <lastmod>2025-10-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://esteria.ru/blog/mify-ob-augmentacii-gub</loc>
-    <lastmod>2025-09-02</lastmod>
+    <loc>https://esteriacosmo.ru/blog/mify-ob-augmentacii-gub</loc>
+    <lastmod>2025-10-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
