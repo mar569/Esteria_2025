@@ -693,14 +693,14 @@ body {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: clamp(16px, 6vw, 50px);
-  padding: 10px clamp(16px, 5vw, 24px);
+  padding: 14px 8px;
   pointer-events: auto;
 }
 
 .pc-user-details {
   display: flex;
   align-items: center;
-  gap: clamp(10px, 3vw, 16px);
+  gap: 10px;
 }
 
 .pc-mini-avatar {

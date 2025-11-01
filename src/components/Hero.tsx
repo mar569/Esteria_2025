@@ -22,7 +22,7 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
         className="hero-bg-image absolute inset-0 w-full h-full object-cover"
         src={heroImg}
         alt="Фоновая иллюстрация косметологических процедур"
-        loading="lazy"
+
         style={{ zIndex: -1, willChange: 'transform' }}
       />
 

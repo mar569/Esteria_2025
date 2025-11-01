@@ -150,7 +150,7 @@ const Header = () => {
             animate="visible"
             exit="exit"
             variants={commonVariants.fadeIn}
-            className="fixed inset-0 bg-white/10 backdrop-blur-lg z-50 p-6 overflow-auto flex flex-col "
+            className="fixed inset-0 bg-white/10 backdrop-blur-lg z-50 p-6  overflow-auto flex flex-col "
             aria-label="Мобильное меню навигации"
             onClick={() => setIsMobileMenuOpen(false)}
           >
