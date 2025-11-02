@@ -1,6 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaPlus, FaMinus } from "react-icons/fa";
+
+const useIsMobile = () => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(max-width: 767px)");
+        setIsMobile(mediaQuery.matches);
+
+        const handleChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+        mediaQuery.addEventListener("change", handleChange);
+
+        return () => mediaQuery.removeEventListener("change", handleChange);
+    }, []);
+
+    return isMobile;
+};
 
 const faqData = [
     {
@@ -23,23 +39,47 @@ const faqData = [
         question: "Больно ли будет?",
         answer: "Большинство процедур проходят безболезненно. При необходимости использую анестезию для вашего комфорта.",
     },
-
 ];
 
 const FaqAccordion: React.FC = () => {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
+    const isMobile = useIsMobile();
 
     const toggleAccordion = (index: number) => {
         setActiveIndex(activeIndex === index ? null : index);
     };
 
+    const containerVariants = isMobile
+        ? { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.3 } }
+        : {
+            initial: { y: 50, opacity: 0 },
+            whileInView: { y: 0, opacity: 1 },
+            transition: { duration: 0.8, delay: 0.2 },
+            viewport: { once: true, margin: "-10%" },
+        };
+
+    const itemVariants = isMobile
+        ? { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.2 } }
+        : {
+            initial: { opacity: 0, y: 20 },
+            whileInView: { opacity: 1, y: 0 },
+            transition: { duration: 0.6, delay: 0.1 },
+            viewport: { once: true },
+        };
+
+    const iconVariants = isMobile
+        ? { transition: { duration: 0.2 } }
+        : { transition: { duration: 0.8 } };
+
+    const contentVariants = {
+        initial: { maxHeight: 0, opacity: 0 },
+        animate: { maxHeight: isMobile ? 200 : 1000, opacity: 1 },
+        exit: { maxHeight: 0, opacity: 0 },
+        transition: { duration: isMobile ? 0.2 : 0.3 },
+    };
+
     return (
-        <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            viewport={{ once: true, margin: "-10%" }}
-        >
+        <motion.div {...containerVariants}>
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-200 mb-8 text-center">
                 Часто задаваемые <span className="text-mint-400 italic">вопросы!</span>
             </h2>
@@ -48,20 +88,18 @@ const FaqAccordion: React.FC = () => {
                     <motion.div
                         key={index}
                         className="bg-gradient-to-b from-gray-200 to-white/90 rounded-xl shadow-lg border border-mint-500/20 hover:border-mint-400/50 transition-all duration-300 overflow-hidden"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: index * 0.1 }}
-                        viewport={{ once: true }}
+                        style={{ willChange: "transform, opacity" }} // Оптимизация для браузера
+                        {...itemVariants}
+                        transition={{ ...itemVariants.transition, delay: index * 0.05 }} // Уменьшенная задержка
                     >
                         <button
                             onClick={() => toggleAccordion(index)}
                             className="w-full p-6 text-left flex items-center focus:outline-none focus:ring-2 focus:ring-mint-400 rounded-xl"
                         >
-
                             <motion.div
                                 className="flex-shrink-0 mr-4"
                                 animate={{ rotate: activeIndex === index ? 180 : 0 }}
-                                transition={{ duration: 0.8 }}
+                                {...iconVariants}
                             >
                                 {activeIndex === index ? (
                                     <FaMinus className="text-black/80 text-xl" />
@@ -69,7 +107,6 @@ const FaqAccordion: React.FC = () => {
                                     <FaPlus className="text-black/80 text-xl" />
                                 )}
                             </motion.div>
-
                             <div className="flex items-center flex-1">
                                 <h3 className="text-lg md:text-xl font-semibold text-black/70">{faq.question}</h3>
                             </div>
@@ -77,13 +114,10 @@ const FaqAccordion: React.FC = () => {
                         <AnimatePresence>
                             {activeIndex === index && (
                                 <motion.div
-                                    initial={{ height: 0, opacity: 0 }}
-                                    animate={{ height: "auto", opacity: 1 }}
-                                    exit={{ height: 0, opacity: 0 }}
-                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                    {...contentVariants}
                                     className="overflow-hidden"
                                 >
-                                    <div className="px-6 pb-6 mt-2 ">
+                                    <div className="px-6 pb-6 mt-2">
                                         <p className="text-black/70 leading-relaxed">{faq.answer}</p>
                                     </div>
                                 </motion.div>

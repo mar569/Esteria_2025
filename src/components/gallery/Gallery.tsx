@@ -56,7 +56,7 @@ const Gallery = forwardRef<HTMLElement>((_props, ref) => {
   };
 
   return (
-    <section id="gallery" className="py-20 relative" ref={ref} data-parallax-speed="0.35">
+    <section id="gallery" className="py-16 relative" ref={ref} data-parallax-speed="0.35">
       <motion.div
         className="container mx-auto px-4"
         variants={commonVariants.staggerContainer}

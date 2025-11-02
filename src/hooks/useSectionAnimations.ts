@@ -30,7 +30,7 @@ export const useSectionAnimations = ({
   footerRef,
 }: UseSectionAnimationsProps) => {
   useEffect(() => {
-    if (typeof window === 'undefined') return; // Исправлено: было ''
+    if (typeof window === 'undefined') return;
 
     document.body.style.touchAction = 'pan-y';
 
@@ -149,7 +149,7 @@ export const useSectionAnimations = ({
 
     animateSection(servicesRef, { x: 50, opacity: 0 }, { x: -5, opacity: 1 });
     animateSection(whymeRef, { x: -20, opacity: 0 }, { x: 5, opacity: 1 });
-    animateSection(contactRef, { x: -40, opacity: 0 }, { x: 10, opacity: 1 });
+    animateSection(contactRef, { x: -40, opacity: 0 }, { x: 0, opacity: 1 });
     animateSection(galleryRef, { x: -40, opacity: 0 }, { x: 10, opacity: 1 });
     animateSection(reviewsRef, { x: -50, opacity: 0 }, { x: 10, opacity: 1 });
     animateSection(

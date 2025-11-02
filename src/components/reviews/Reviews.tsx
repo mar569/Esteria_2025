@@ -11,7 +11,7 @@ const Reviews = forwardRef<HTMLElement>((_, ref) => {
   return (
     <section
       id="reviews"
-      className="py-10 md:py-20 relative"
+      className="py-16 relative"
       ref={ref}
       data-parallax-speed="0.25"
     >

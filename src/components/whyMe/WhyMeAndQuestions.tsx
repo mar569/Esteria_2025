@@ -94,7 +94,7 @@ const WhyMeAndQuestions: React.FC = () => {
                         <div className="relative mr-[150px] md:mr-[600px]">
                             <div className="absolute top-4 right-0 w-40 h-48 bg-gradient-to-tr from-amber-500/80 to-pink-200 rounded-full blur-xl transform rotate-12"></div>
                             <div
-                                className="relative w-[240px] h-[240px] md:w-[300px] md:h-[300px] rounded-full border-4 border-gray-300 overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-500"
+                                className="relative w-[220px] h-[220px] md:w-[300px] md:h-[300px] rounded-full border-4 border-gray-400 overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-500"
                                 style={{
                                     background: 'linear-gradient(145deg, #e5e5e5, #b8b8b8)',
                                     boxShadow: '0 20px 40px rgba(0,0,0,0.4), inset 0 10px 20px rgba(255,255,255,0.6), inset 0 -10px 20px rgba(0,0,0,0.3)',

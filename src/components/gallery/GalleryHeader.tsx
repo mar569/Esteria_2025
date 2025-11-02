@@ -19,10 +19,11 @@ const GalleryHeader = () => (
         custom={0}
     >
         <div className="flex items-center justify-center space-x-2 mb-6">
-            <Camera className="text-mint-500" size={32} />
-            <span className="text-mint-500 font-medium uppercase tracking-wider text-2xl lg:text-4xl">
+            <Camera className="text-mint-500" size={30} />
+            <span className="text-mint-500 font-medium uppercase tracking-wider text-xl sm:text-2xl lg:text-4xl">
                 Фотографии кабинета
             </span>
+
         </div>
 
         <motion.p

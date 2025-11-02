@@ -14,7 +14,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
   return (
     <section
       id="contact"
-      className="py-20 relative"
+      className="py-16 relative"
       ref={ref}
       style={{ touchAction: 'pan-y pinch-zoom' }}
       data-parallax-speed="0.3"
@@ -25,7 +25,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
         animate="visible"
         className="container mx-auto px-4"
       >
-        <div className="text-center mb-16 px-4 sm:px-0">
+        <div className="text-center mb-12 px-4 sm:px-0">
           <motion.h2
             className="text-3xl lg:text-4xl font-bold text-gray-200 mb-8 bg-gradient-to-br from-slate-200 to-slate-400 bg-clip-text text-transparent"
             initial={{ opacity: 0, y: 20 }}
