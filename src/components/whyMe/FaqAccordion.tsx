@@ -1,22 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaPlus, FaMinus } from "react-icons/fa";
-
-const useIsMobile = () => {
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const mediaQuery = window.matchMedia("(max-width: 767px)");
-        setIsMobile(mediaQuery.matches);
-
-        const handleChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-        mediaQuery.addEventListener("change", handleChange);
-
-        return () => mediaQuery.removeEventListener("change", handleChange);
-    }, []);
-
-    return isMobile;
-};
 
 const faqData = [
     {
@@ -43,39 +27,34 @@ const faqData = [
 
 const FaqAccordion: React.FC = () => {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
-    const isMobile = useIsMobile();
 
     const toggleAccordion = (index: number) => {
         setActiveIndex(activeIndex === index ? null : index);
     };
 
-    const containerVariants = isMobile
-        ? { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.3 } }
-        : {
-            initial: { y: 50, opacity: 0 },
-            whileInView: { y: 0, opacity: 1 },
-            transition: { duration: 0.8, delay: 0.2 },
-            viewport: { once: true, margin: "-10%" },
-        };
+    const containerVariants = {
+        initial: { y: 50, opacity: 0 },
+        whileInView: { y: 0, opacity: 1 },
+        transition: { duration: 0.8, delay: 0.2 },
+        viewport: { once: true, margin: "-10%" },
+    };
 
-    const itemVariants = isMobile
-        ? { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.2 } }
-        : {
-            initial: { opacity: 0, y: 20 },
-            whileInView: { opacity: 1, y: 0 },
-            transition: { duration: 0.6, delay: 0.1 },
-            viewport: { once: true },
-        };
+    const itemVariants = {
+        initial: { opacity: 0, y: 20 },
+        whileInView: { opacity: 1, y: 0 },
+        transition: { duration: 0.6, delay: 0.1 },
+        viewport: { once: true },
+    };
 
-    const iconVariants = isMobile
-        ? { transition: { duration: 0.2 } }
-        : { transition: { duration: 0.8 } };
+    const iconVariants = {
+        transition: { duration: 0.8 },
+    };
 
     const contentVariants = {
         initial: { maxHeight: 0, opacity: 0 },
-        animate: { maxHeight: isMobile ? 200 : 1000, opacity: 1 },
+        animate: { maxHeight: 1000, opacity: 1 },
         exit: { maxHeight: 0, opacity: 0 },
-        transition: { duration: isMobile ? 0.2 : 0.3 },
+        transition: { duration: 0.3 },
     };
 
     return (
