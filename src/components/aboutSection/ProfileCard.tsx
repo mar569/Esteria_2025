@@ -1,8 +1,13 @@
 import React from 'react';
-
 import me from '../../assets/me.png';
+import { socialLinks } from '../../utils/socialLinks';
+
 
 const ProfileCard: React.FC = () => {
+    const handleBookClick = () => {
+        window.open(socialLinks.vk, '_blank');
+    };
+
     return (
         <div
             className="pc-card-wrapper flex justify-center items-center"
@@ -36,10 +41,10 @@ const ProfileCard: React.FC = () => {
                             </div>
                             <button
                                 className="pc-contact-btn"
-                                onClick={() => console.log('Contact clicked')}
                                 style={{ pointerEvents: 'auto' }}
                                 type="button"
                                 aria-label="Записаться к Марианне Владимировне"
+                                onClick={handleBookClick}
                             >
                                 Записаться
                             </button>
