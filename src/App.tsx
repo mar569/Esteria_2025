@@ -22,20 +22,20 @@ function App() {
       title: 'Косметология Эстерия | Косметологический кабинет в Шлиссельбурге',
       description: 'Косметология Эстерия: биоревитализация, аугментация губ, чистка лица, массаж лица, липолитики по телу и лицу, ботулинотерапия, коллаген и другие процедуры.',
       url: 'https://esteriacosmo.ru',
-      iconPath: '/favicon.ico',
+
     },
 
     '/reviews': {
       title: 'Все отзывы - Эстерия',
       description: 'Полный список отзывов клиентов Esteria.',
       url: 'https://esteriacosmo.ru/reviews',
-      iconPath: '/favicon.ico',
+
     },
     '/blog': {
       title: 'Блог о косметологии - Эстерия',
       description: 'Статьи и советы по косметологии, уходу за кожей и процедурам в Esteria.',
       url: 'https://esteriacosmo.ru/blog',
-      iconPath: '/favicon.ico',
+
     },
   };
 
@@ -50,7 +50,7 @@ function App() {
               title={currentSEO.title}
               description={currentSEO.description}
               url={currentSEO.url}
-              iconPath={currentSEO.iconPath} // Передача favicon
+
             />
             <Suspense fallback={<div className="spinner_suspense"></div>}>
               <Routes>
