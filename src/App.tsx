@@ -1,7 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
-
 import PageLayout from './components/PageLayout';
 
 import SEOHead from './components/SEOHead';
@@ -20,20 +19,23 @@ function App() {
 
   const seoData = {
     '/': {
-      title: 'Esteria - Косметологический кабинет в Шлиссельбурге',
+      title: 'Эстерия - Косметологический кабинет в Шлиссельбурге',
       description:
         'Esteria — косметологический кабинет в Шлиссельбурге. Биоревитализация, аугментация губ, чистка лица, массаж лица, липолитики по телу и лицу, ботулинотерапия, коллаген и другие процедуры.',
       url: 'https://esteriacosmo.ru',
+      iconPath: '/favicon.ico',
     },
     '/reviews': {
-      title: 'Все отзывы - Esteria',
+      title: 'Все отзывы - Эстерия',
       description: 'Полный список отзывов клиентов Esteria.',
       url: 'https://esteriacosmo.ru/reviews',
+      iconPath: '/favicon.ico',
     },
     '/blog': {
-      title: 'Блог о косметологии - Esteria',
+      title: 'Блог о косметологии - Эстерия',
       description: 'Статьи и советы по косметологии, уходу за кожей и процедурам в Esteria.',
       url: 'https://esteriacosmo.ru/blog',
+      iconPath: '/favicon.ico',
     },
   };
 
@@ -48,6 +50,7 @@ function App() {
               title={currentSEO.title}
               description={currentSEO.description}
               url={currentSEO.url}
+              iconPath={currentSEO.iconPath} // Передача favicon
             />
             <Suspense fallback={<div className="spinner_suspense"></div>}>
               <Routes>
