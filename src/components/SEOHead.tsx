@@ -4,7 +4,6 @@ interface SEOHeadProps {
   title: string;
   description: string;
   url: string;
-  iconPath?: string;
 }
 
 const structuredData = {
@@ -36,7 +35,12 @@ const structuredData = {
     "hoursAvailable": {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": [
-        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
       ],
       "opens": "09:00",
       "closes": "20:00"
@@ -49,7 +53,12 @@ const structuredData = {
     {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": [
-        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
       ],
       "opens": "09:00",
       "closes": "20:00"
@@ -68,77 +77,83 @@ const structuredData = {
   }
 };
 
-const SEOHead: React.FC<SEOHeadProps> = ({ title, description, url, iconPath = '/favicon.ico' }) => {
+const SEOHead: React.FC<SEOHeadProps> = ({ title, description, url }) => {
   useEffect(() => {
+
     document.title = title;
 
-    const setOrUpdateMeta = (attributes: { [key: string]: string }) => {
-      const selector = Object.entries(attributes)
-        .map(([k, v]) => `[${k}="${v}"]`)
-        .join('');
-      let meta = document.querySelector(`meta${selector}`) as HTMLMetaElement;
-
-      if (!meta) {
-        meta = document.createElement('meta');
-        Object.entries(attributes).forEach(([k, v]) => meta.setAttribute(k, v));
-        document.head.appendChild(meta);
-      } else {
-        Object.entries(attributes).forEach(([k, v]) => meta.setAttribute(k, v));
+    const setMetaTag = (name: string, content: string, property?: string) => {
+      let element = document.querySelector(`meta[${property ? `property="${property}"` : `name="${name}"`}]`) as HTMLMetaElement;
+      if (!element) {
+        element = document.createElement('meta');
+        if (property) {
+          element.setAttribute('property', property);
+        } else {
+          element.setAttribute('name', name);
+        }
+        document.head.appendChild(element);
       }
+      element.setAttribute('content', content);
     };
 
-    const setOrUpdateLink = (rel: string, href: string, type?: string) => {
-      let link = document.querySelector(`link[rel="${rel}"]`) as HTMLLinkElement;
-      if (!link) {
-        link = document.createElement('link');
-        link.setAttribute('rel', rel);
-        document.head.appendChild(link);
+    const setLinkTag = (rel: string, href: string, type?: string) => {
+      let element = document.querySelector(`link[rel="${rel}"]`) as HTMLLinkElement;
+      if (!element) {
+        element = document.createElement('link');
+        element.setAttribute('rel', rel);
+        document.head.appendChild(element);
       }
-      link.setAttribute('href', href);
-      if (type) link.setAttribute('type', type);
+      element.setAttribute('href', href);
+      if (type) element.setAttribute('type', type);
     };
 
-    const setOrUpdateScript = (type: string, content: string) => {
-      let script = document.querySelector(`script[type="${type}"]`) as HTMLScriptElement;
-      if (!script) {
-        script = document.createElement('script');
-        script.setAttribute('type', type);
-        document.head.appendChild(script);
+    const setScriptTag = (type: string, content: string) => {
+      let element = document.querySelector(`script[type="${type}"]`) as HTMLScriptElement;
+      if (!element) {
+        element = document.createElement('script');
+        element.setAttribute('type', type);
+        document.head.appendChild(element);
       }
-      script.textContent = content;
+      element.textContent = content;
     };
 
-    document.querySelectorAll('meta[name], meta[property], link[rel], script[type="application/ld+json"]').forEach(el => el.remove());
+    // Добавляем мета-теги
+    setMetaTag('charset', 'UTF-8');
+    setMetaTag('viewport', 'width=device-width, initial-scale=1');
+    setMetaTag('description', description);
+    setMetaTag('keywords', 'косметология, биоревитализация, аугментация губ, чистка лица, массаж лица, липолитики, ботулинотерапия, коллаген, Шлиссельбург, косметолог');
+    setMetaTag('robots', 'index, follow');
+    setMetaTag('author', 'Эстерия');
+    setMetaTag('theme-color', '#122720');
 
-    setOrUpdateMeta({ charset: 'UTF-8' });
-    setOrUpdateMeta({ name: 'viewport', content: 'width=device-width, initial-scale=1' });
-    setOrUpdateMeta({ name: 'description', content: description });
-    setOrUpdateMeta({ name: 'keywords', content: 'косметология, биоревитализация, аугментация губ, чистка лица, массаж лица, липолитики, ботулинотерапия, коллаген, Шлиссельбург, косметолог' });
-    setOrUpdateMeta({ name: 'robots', content: 'index, follow' });
-    setOrUpdateMeta({ name: 'author', content: 'Эстерия' });
-    setOrUpdateMeta({ name: 'theme-color', content: '#122720' });
+    // Open Graph мета-теги
+    setMetaTag('og:title', title, 'og:title');
+    setMetaTag('og:description', description, 'og:description');
+    setMetaTag('og:type', 'website', 'og:type');
+    setMetaTag('og:site_name', 'Esteria', 'og:site_name');
+    setMetaTag('og:locale', 'ru_RU', 'og:locale');
+    setMetaTag('og:image', '../assets/interior/interior-2.jpg', 'og:image');
+    setMetaTag('og:image:width', '1200', 'og:image:width');
+    setMetaTag('og:image:height', '630', 'og:image:height');
 
-    setOrUpdateMeta({ property: 'og:title', content: title });
-    setOrUpdateMeta({ property: 'og:description', content: description });
-    setOrUpdateMeta({ property: 'og:type', content: 'website' });
-    setOrUpdateMeta({ property: 'og:site_name', content: 'Esteria' });
-    setOrUpdateMeta({ property: 'og:locale', content: 'ru_RU' });
-    setOrUpdateMeta({ property: 'og:image', content: '/assets/interior/interior-2.jpg' }); // Исправлено: абсолютный путь
-    setOrUpdateMeta({ property: 'og:image:width', content: '1200' });
-    setOrUpdateMeta({ property: 'og:image:height', content: '630' });
 
-    setOrUpdateMeta({ name: 'geo.region', content: 'RU-LEN' });
-    setOrUpdateMeta({ name: 'geo.placename', content: 'Шлиссельбург' });
-    setOrUpdateMeta({ name: 'geo.position', content: '59.9458;31.0115' });
-    setOrUpdateMeta({ name: 'ICBM', content: '59.9458, 31.0115' });
+    setMetaTag('geo.region', 'RU-LEN');
+    setMetaTag('geo.placename', 'Шлиссельбург');
+    setMetaTag('geo.position', '59.9458;31.0115');
+    setMetaTag('ICBM', '59.9458, 31.0115');
 
-    setOrUpdateLink('canonical', url);
-    setOrUpdateLink('icon', iconPath, 'image/x-icon');
 
-    setOrUpdateScript('application/ld+json', JSON.stringify(structuredData));
+    setLinkTag('canonical', url);
+    setLinkTag('icon', '/logo.png', 'image/x-icon');
 
-    return () => { };
-  }, [title, description, url, iconPath]);
+
+    setScriptTag('application/ld+json', JSON.stringify(structuredData));
+
+
+    return () => {
+
+    };
+  }, [title, description, url]);
 
   return null;
 };
