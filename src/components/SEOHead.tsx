@@ -123,10 +123,9 @@ const SEOHead: React.FC<SEOHeadProps> = ({ title, description, url, iconPath = '
     setOrUpdateMeta({ property: 'og:type', content: 'website' });
     setOrUpdateMeta({ property: 'og:site_name', content: 'Esteria' });
     setOrUpdateMeta({ property: 'og:locale', content: 'ru_RU' });
-    setOrUpdateMeta({ property: 'og:image', content: '../assets/interior/interior-2.jpg' });
+    setOrUpdateMeta({ property: 'og:image', content: '/assets/interior/interior-2.jpg' }); // Исправлено: абсолютный путь
     setOrUpdateMeta({ property: 'og:image:width', content: '1200' });
     setOrUpdateMeta({ property: 'og:image:height', content: '630' });
-
 
     setOrUpdateMeta({ name: 'geo.region', content: 'RU-LEN' });
     setOrUpdateMeta({ name: 'geo.placename', content: 'Шлиссельбург' });
@@ -138,9 +137,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ title, description, url, iconPath = '
 
     setOrUpdateScript('application/ld+json', JSON.stringify(structuredData));
 
-    return () => {
-
-    };
+    return () => { };
   }, [title, description, url, iconPath]);
 
   return null;
