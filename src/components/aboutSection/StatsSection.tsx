@@ -12,7 +12,7 @@ const StatsSection: React.FC = () => {
     const statsData = [
         {
             icon: <Users size={32} />,
-            number: <CountGroup value={190} suffix="+" />,
+            number: <CountGroup value={90} suffix="+" />,
             label: 'Довольных клиентов'
         },
         {
