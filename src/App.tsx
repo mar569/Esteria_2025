@@ -1,4 +1,4 @@
-import { lazy, Suspense, } from 'react';
+import { lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
 import PageLayout from './components/PageLayout';
@@ -10,12 +10,11 @@ import ErrorBoundary from './ErrorBoundary';
 import ArticlePage from './pages/ArticlePage';
 
 const Blog = lazy(() => import('./components/Blog'));
-const HomePage = lazy(() => import('./pages/HomePage'));  // Сделали ленивой
+const HomePage = lazy(() => import('./pages/HomePage'));
 
 function App() {
   const location = useLocation();
   const hideHeader = location.pathname !== '/';
-
 
   const seoData = {
     '/': {
@@ -37,33 +36,30 @@ function App() {
 
   const currentSEO = seoData[location.pathname as keyof typeof seoData] || seoData['/'];
 
-
-
   return (
     <div className="background-wrapper min-h-screen parallax-container">
       <ErrorBoundary>
         <ServiceProvider>
-          <PageLayout hideHeader={hideHeader}>
-            <SEOHead
-              title={currentSEO.title}
-              description={currentSEO.description}
-              url={currentSEO.url}
-            />
-            <Suspense fallback={
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100%' }}>
-                <div className="loader">
-                  <div className="circle">
-                    <div className="dot"></div>
-                    <div className="outline"></div>
-                  </div>
-                  <div className="circle">
-                    <div className="dot"></div>
-                    <div className="outline"></div>
-                  </div>
-
+          <Suspense fallback={
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100%' }}>
+              <div className="loader">
+                <div className="circle">
+                  <div className="dot"></div>
+                  <div className="outline"></div>
+                </div>
+                <div className="circle">
+                  <div className="dot"></div>
+                  <div className="outline"></div>
                 </div>
               </div>
-            }>
+            </div>
+          }>
+            <PageLayout hideHeader={hideHeader}>
+              <SEOHead
+                title={currentSEO.title}
+                description={currentSEO.description}
+                url={currentSEO.url}
+              />
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/reviews" element={<AllReviewsPage />} />
@@ -71,8 +67,8 @@ function App() {
                 <Route path="/blog/:id" element={<ArticlePage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
-            </Suspense>
-          </PageLayout>
+            </PageLayout>
+          </Suspense>
         </ServiceProvider>
       </ErrorBoundary>
     </div>
