@@ -8,7 +8,7 @@ interface SEOHeadProps {
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "MedicalBusiness",
+  "@type": "MedicalClinic",
   "name": "Эстерия",
   "description": "Косметологический кабинет в Шлиссельбурге. Биоревитализация, аугментация губ, чистка лица, массаж лица, липолитики по телу и лицу, ботулинотерапия, коллаген и другие процедуры.",
   "url": "https://esteriacosmo.ru",
@@ -23,14 +23,14 @@ const structuredData = {
     "addressCountry": "RU"
   },
   "geo": {
-    "@type": "GeoCoordinates",
+    "@type": "GGeoCoordinates",
     "latitude": 59.9458,
     "longitude": 31.0115
   },
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": "+7-965-788-7750",
-    "contactType": "customer service",
+    "contactType": "Customer Service",
     "availableLanguage": ["Russian"],
     "hoursAvailable": {
       "@type": "OpeningHoursSpecification",
@@ -72,7 +72,7 @@ const structuredData = {
   ],
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.9",
+    "ratingValue": "5",
     "reviewCount": "2000"
   }
 };
