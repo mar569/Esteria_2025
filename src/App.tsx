@@ -1,45 +1,43 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
 import PageLayout from './components/PageLayout';
-
 import SEOHead from './components/SEOHead';
 import NotFoundPage from './components/NotFoundPage';
-import HomePage from './pages/HomePage';
-import ArticlePage from './pages/ArticlePage';
 import AllReviewsPage from './pages/AllReviewsPage';
 import { ServiceProvider } from './components/context/ServiceContext';
 import ErrorBoundary from './ErrorBoundary';
+import ArticlePage from './pages/ArticlePage';
 
 const Blog = lazy(() => import('./components/Blog'));
+const HomePage = lazy(() => import('./pages/HomePage'));  // Сделали ленивой
 
 function App() {
   const location = useLocation();
   const hideHeader = location.pathname !== '/';
+
 
   const seoData = {
     '/': {
       title: 'Косметология в Шлиссельбурге | Косметология Эстерия в Шлиссельбурге',
       description: 'Косметология Эстерия - биоревитализация, аугментация губ, чистка лица, массаж лица, липолитики по телу и лицу, ботулинотерапия, коллаген и другие процедуры в Шлиссельбурге.',
       url: 'https://esteriacosmo.ru',
-
     },
-
     '/reviews': {
       title: 'Все отзывы - Эстерия',
       description: 'Полный список отзывов клиентов Эстерия.',
       url: 'https://esteriacosmo.ru/reviews',
-
     },
     '/blog': {
       title: 'Блог о косметологии - Эстерия',
       description: 'Статьи и советы по косметологии, уходу за кожей и процедурам в Эстерия.',
       url: 'https://esteriacosmo.ru/blog',
-
     },
   };
 
   const currentSEO = seoData[location.pathname as keyof typeof seoData] || seoData['/'];
+
+
 
   return (
     <div className="background-wrapper min-h-screen parallax-container">
@@ -50,9 +48,29 @@ function App() {
               title={currentSEO.title}
               description={currentSEO.description}
               url={currentSEO.url}
-
             />
-            <Suspense fallback={<div className="spinner_suspense"></div>}>
+            <Suspense fallback={
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100%' }}>
+                <div className="loader">
+                  <div className="circle">
+                    <div className="dot"></div>
+                    <div className="outline"></div>
+                  </div>
+                  <div className="circle">
+                    <div className="dot"></div>
+                    <div className="outline"></div>
+                  </div>
+                  <div className="circle">
+                    <div className="dot"></div>
+                    <div className="outline"></div>
+                  </div>
+                  <div className="circle">
+                    <div className="dot"></div>
+                    <div className="outline"></div>
+                  </div>
+                </div>
+              </div>
+            }>
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/reviews" element={<AllReviewsPage />} />
