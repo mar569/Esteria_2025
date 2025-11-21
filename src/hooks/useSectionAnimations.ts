@@ -211,17 +211,20 @@ export const scrollToSection = (href: string) => {
     const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
 
     if (isMobile) {
-      window.scrollTo({
-        top: el.offsetTop,
-        behavior: 'smooth',
-      });
-    } else {
-      gsap.to(window, {
-        duration: 1.5,
-        scrollTo: { y: el.offsetTop, autoKill: true },
-        ease: 'power2.out',
-        invalidateOnRefresh: true,
-      });
+      document.body.style.touchAction = 'none';
+      setTimeout(() => {
+        document.body.style.touchAction = 'pan-y';
+      }, 2500);
     }
+
+    gsap.to(window, {
+      duration: isMobile ? 2 : 1.5,
+      scrollTo: {
+        y: el.offsetTop,
+        autoKill: true,
+      },
+      ease: 'power2.out',
+      invalidateOnRefresh: true,
+    });
   }
 };
