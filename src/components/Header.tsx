@@ -5,10 +5,8 @@ import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, easeInOut } from 'framer-motion';
 import logo from '../assets/logo.png';
 import { commonVariants } from '../utils/animations';
-import { gsap } from 'gsap';
-import { ScrollToPlugin } from 'gsap/all';
-
-gsap.registerPlugin(ScrollToPlugin);
+// Убрал импорт ScrollToPlugin, так как он не нужен
+import { scrollToSection } from '../hooks/useSectionAnimations'; // Импорт общей функции
 
 const navItems = [
   { name: 'Главная', href: '#hero' },
@@ -67,18 +65,6 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const id = href.replace('#', '');
-    const el = document.getElementById(id);
-    if (el) {
-
-      gsap.to(window, {
-        duration: 2,
-        scrollTo: { y: el.offsetTop, autoKill: false },
-        ease: "power2.out"
-      });
-    }
-  };
   const menuVariants = {
     ...commonVariants.fadeIn,
     exit: {

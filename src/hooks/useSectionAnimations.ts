@@ -1,8 +1,8 @@
 import { gsap } from 'gsap';
-import { ScrollTrigger, ScrollToPlugin } from 'gsap/all';
+import { ScrollTrigger } from 'gsap/all'; // Убрал ScrollToPlugin, так как он не нужен для скролла
 import { useEffect, RefObject } from 'react';
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger); // Только ScrollTrigger для анимаций
 
 interface UseSectionAnimationsProps {
   heroRef: RefObject<HTMLElement>;
@@ -207,21 +207,10 @@ export const useSectionAnimations = ({
 export const scrollToSection = (href: string) => {
   const id = href.replace('#', '');
   const el = document.getElementById(id);
-  if (el) {
-    const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+  if (!el) return;
 
-    if (isMobile) {
-      window.scrollTo({
-        top: el.offsetTop,
-        behavior: 'smooth',
-      });
-    } else {
-      gsap.to(window, {
-        duration: 1.5,
-        scrollTo: { y: el.offsetTop, autoKill: true },
-        ease: 'power2.out',
-        invalidateOnRefresh: true,
-      });
-    }
-  }
+  window.scrollTo({
+    top: el.offsetTop,
+    behavior: 'smooth',
+  });
 };
