@@ -208,10 +208,20 @@ export const scrollToSection = (href: string) => {
   const id = href.replace('#', '');
   const el = document.getElementById(id);
   if (el) {
-    gsap.to(window, {
-      duration: 2,
-      scrollTo: { y: el.offsetTop, autoKill: false },
-      ease: 'power2.out',
-    });
+    const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+
+    if (isMobile) {
+      window.scrollTo({
+        top: el.offsetTop,
+        behavior: 'smooth',
+      });
+    } else {
+      gsap.to(window, {
+        duration: 1.5,
+        scrollTo: { y: el.offsetTop, autoKill: true },
+        ease: 'power2.out',
+        invalidateOnRefresh: true,
+      });
+    }
   }
 };

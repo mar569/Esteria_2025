@@ -71,12 +71,24 @@ const Header = () => {
     const id = href.replace('#', '');
     const el = document.getElementById(id);
     if (el) {
+      // Проверка на мобильное устройство (ширина экрана < 768px или touch-устройство)
+      const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
 
-      gsap.to(window, {
-        duration: 2,
-        scrollTo: { y: el.offsetTop, autoKill: false },
-        ease: "power2.out"
-      });
+      if (isMobile) {
+        // Нативный скролл для мобильных (быстрее и стабильнее)
+        window.scrollTo({
+          top: el.offsetTop,
+          behavior: 'smooth',
+        });
+      } else {
+        // GSAP для десктопа
+        gsap.to(window, {
+          duration: 1.5,  // Уменьшил с 2 до 1.5 для плавности
+          scrollTo: { y: el.offsetTop, autoKill: true },  // autoKill: true для предотвращения конфликтов
+          ease: 'power2.out',
+          invalidateOnRefresh: true,  // Пересчет при изменениях viewport
+        });
+      }
     }
   };
   const menuVariants = {
