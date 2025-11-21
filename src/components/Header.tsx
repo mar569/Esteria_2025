@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Phone, Menu, X } from 'lucide-react';
 import SparkleNavbar from './lightswind/SparkleNavbar';
 import { useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, easeInOut } from 'framer-motion';
 import logo from '../assets/logo.png';
 import { commonVariants } from '../utils/animations';
+import { gsap } from 'gsap';
+import { ScrollToPlugin } from 'gsap/all';
+
+gsap.registerPlugin(ScrollToPlugin);
 
 const navItems = [
   { name: 'Главная', href: '#hero' },
@@ -59,7 +63,7 @@ const Header = () => {
       setActiveSection(current);
     };
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Вызываем сразу для начального состояния
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -67,8 +71,21 @@ const Header = () => {
     const id = href.replace('#', '');
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+
+      gsap.to(window, {
+        duration: 2,
+        scrollTo: { y: el.offsetTop, autoKill: false },
+        ease: "power2.out"
+      });
     }
+  };
+  const menuVariants = {
+    ...commonVariants.fadeIn,
+    exit: {
+      opacity: 0,
+      scale: 0.95,
+      transition: { duration: 0.3, ease: easeInOut },
+    },
   };
 
   return (
@@ -147,8 +164,8 @@ const Header = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            variants={commonVariants.fadeIn}
-            className="fixed inset-0 bg-white/10 backdrop-blur-lg z-50 p-6  overflow-auto flex flex-col "
+            variants={menuVariants}
+            className="fixed inset-0 bg-white/10 backdrop-blur-lg z-50 p-6 overflow-auto flex flex-col"
             aria-label="Мобильное меню навигации"
             onClick={() => setIsMobileMenuOpen(false)}
           >
@@ -164,10 +181,9 @@ const Header = () => {
                       setIsMobileMenuOpen(false);
                       scrollToSection(item.href);
                     }}
-
                     className={`relative px-4 py-3 rounded-r-xl font-semibold text-lg transition-colors ${isActive
-                      ? 'text-mint-500 bg-[#aeeacf56] '
-                      : 'text-white hover:text-mint-300 hover:bg-[#b0c2ba56]'
+                      ? 'text-mint-500 bg-white/5'
+                      : 'text-white hover:text-mint-300 '
                       }`}
                   >
                     {isActive && (
@@ -189,7 +205,7 @@ const Header = () => {
           </motion.nav>
         )}
       </AnimatePresence>
-    </motion.header>
+    </motion.header >
   );
 };
 

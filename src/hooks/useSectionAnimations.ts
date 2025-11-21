@@ -203,3 +203,15 @@ export const useSectionAnimations = ({
     };
   }, []);
 };
+
+export const scrollToSection = (href: string) => {
+  const id = href.replace('#', '');
+  const el = document.getElementById(id);
+  if (el) {
+    gsap.to(window, {
+      duration: 2,
+      scrollTo: { y: el.offsetTop, autoKill: false },
+      ease: 'power2.out',
+    });
+  }
+};

@@ -8,11 +8,9 @@ import Appointment from '../components/appointment/Appointment';
 import Blog from '../components/Blog';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
-import { useSectionAnimations } from '../hooks/useSectionAnimations';
-import { smoothScrollTo } from '../utils/smoothScroll';
+import { useSectionAnimations, scrollToSection } from '../hooks/useSectionAnimations'; // Импорт scrollToSection
 import { useService } from '../components/context/ServiceContext';
 import WhyMeAndQuestions from '../components/whyMe/WhyMeAndQuestions';
-
 
 const HomePage: React.FC = () => {
     const heroRef = useRef<HTMLElement>(null);
@@ -49,7 +47,7 @@ const HomePage: React.FC = () => {
 
     const openAppointmentWithService = (service: string) => {
         setSelectedService(service);
-        smoothScrollTo('#appointment');
+        scrollToSection('#appointment');
     };
 
     const handleConsultationClick = () => {
@@ -58,37 +56,37 @@ const HomePage: React.FC = () => {
 
     return (
         <div style={{ scrollBehavior: 'smooth' }}>
-            <section ref={heroRef} className="hero-bg" style={{ position: 'relative', minHeight: '100vh' }}>
+            <section ref={heroRef} id="hero" className="hero-bg" style={{ position: 'relative', minHeight: '100vh' }}>
                 <Hero />
             </section>
 
-            <section ref={aboutRef} style={{ position: 'relative' }}>
+            <section ref={aboutRef} id="about" style={{ position: 'relative' }}>
                 <AboutMe stats={stats} onConsultationClick={handleConsultationClick} />
             </section>
 
-            <section ref={galleryRef} style={{ position: 'relative' }}>
+            <section ref={galleryRef} id="gallery" style={{ position: 'relative' }}>
                 <Gallery />
             </section>
 
             <Services ref={servicesRef} onSelectService={openAppointmentWithService} />
 
-            <section ref={whymeRef} style={{ position: 'relative' }}>
+            <section ref={whymeRef} id="whyme" style={{ position: 'relative' }}>
                 <WhyMeAndQuestions />
             </section>
 
-            <section ref={reviewsRef} style={{ position: 'relative' }}>
+            <section ref={reviewsRef} id="reviews" style={{ position: 'relative' }}>
                 <Reviews />
             </section>
 
-            <section ref={appointmentRef} style={{ position: 'relative' }}>
+            <section ref={appointmentRef} id="appointment" style={{ position: 'relative' }}>
                 <Appointment />
             </section>
 
-            <section ref={blogRef} style={{ position: 'relative' }}>
+            <section ref={blogRef} id="blog" style={{ position: 'relative' }}>
                 <Blog />
             </section>
 
-            <section ref={contactRef} style={{ position: 'relative' }}>
+            <section ref={contactRef} id="contact" style={{ position: 'relative' }}>
                 <Contact />
             </section>
 
