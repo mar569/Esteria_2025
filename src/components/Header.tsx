@@ -71,25 +71,11 @@ const Header = () => {
     const id = href.replace('#', '');
     const el = document.getElementById(id);
     if (el) {
-      const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
-
-
-      if (isMobile) {
-        document.body.style.touchAction = 'none';
-        setTimeout(() => {
-          document.body.style.touchAction = 'pan-y';
-        }, 2500);
-      }
 
       gsap.to(window, {
-        duration: isMobile ? 2 : 1.5,
-        scrollTo: {
-          y: el.offsetTop,
-          autoKill: true,
-
-        },
-        ease: 'power2.out',
-        invalidateOnRefresh: true,
+        duration: 2,
+        scrollTo: { y: el.offsetTop, autoKill: false },
+        ease: "power2.out"
       });
     }
   };
