@@ -45,7 +45,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isMobileMenuOpen, setIsMobileMe
                 >
                     <motion.button
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="self-end mb-6 p-2 text-white hover:text-mint-300 transition-colors"
+                        className="self-end mb-6  text-white hover:text-mint-300 transition-colors"
                         aria-label="Закрыть меню"
                     >
                         <X size={32} />
@@ -62,7 +62,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isMobileMenuOpen, setIsMobileMe
                                         setIsMobileMenuOpen(false);
                                         scrollToSection(item.href);
                                     }}
-                                    className={`relative px-6 py-2 rounded-2xl font-semibold text-xl transition-all duration-300 ${isActive
+                                    className={`relative px-6 py-1 rounded-tr-2xl font-semibold text-xl transition-all duration-300 ${isActive
                                         ? 'text-mint-400 shadow-lg'
                                         : 'text-white hover:text-mint-300 hover:bg-white/5'
                                         }`}
