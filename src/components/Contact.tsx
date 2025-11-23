@@ -144,7 +144,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                     href={socialLinks.vk}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 sm:w-12 sm:h-12 bg-black/50 border border-black/10 hover:border-emerald-400 rounded-full flex items-center justify-center shadow-lg hover:text-emerald-300 transition-colors duration-800 group hover:scale-110"
+                    className="w-10 h-10 sm:w-12 sm:h-12 bg-black/70 border border-black/10 hover:border-emerald-400 rounded-full flex items-center justify-center shadow-lg hover:text-emerald-300 transition-colors duration-800 group hover:scale-110"
                     aria-label="VK"
                     variants={contactVariants}
                     initial="hidden"
@@ -156,7 +156,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                     href={socialLinks.whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 sm:w-12 sm:h-12 bg-black/50 border border-black/10 hover:border-emerald-400 rounded-full flex items-center justify-center shadow-lg hover:text-emerald-300 transition-colors duration-800 group hover:scale-110"
+                    className="w-10 h-10 sm:w-12 sm:h-12 bg-black/70 border border-black/10 hover:border-emerald-400 rounded-full flex items-center justify-center shadow-lg hover:text-emerald-300 transition-colors duration-800 group hover:scale-110"
                     aria-label="Сообщения"
                     variants={contactVariants}
                     initial="hidden"
@@ -168,7 +168,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                     href={socialLinks.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 sm:w-12 sm:h-12 bg-black/50 border border-black/10 hover:border-emerald-400 rounded-full flex items-center justify-center shadow-lg hover:text-emerald-300 transition-colors duration-800 group hover:scale-110"
+                    className="w-10 h-10 sm:w-12 sm:h-12 bg-black/70 border border-black/10 hover:border-emerald-400 rounded-full flex items-center justify-center shadow-lg hover:text-emerald-300 transition-colors duration-800 group hover:scale-110"
                     aria-label="Telegram"
                     variants={contactVariants}
                     initial="hidden"

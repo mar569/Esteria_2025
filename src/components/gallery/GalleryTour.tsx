@@ -1,5 +1,5 @@
 import { easeInOut, motion } from 'framer-motion';
-import { Play, Phone } from 'lucide-react';
+import { Phone, HandHeart } from 'lucide-react';
 
 interface Props {
     customIndex: number;
@@ -52,9 +52,9 @@ const VirtualTour = ({ customIndex, categoryTrigger }: Props) => {
                         delay: getDelay(1),
                     }}
                 >
-                    <Play className="text-mint-500" size={32} />
+                    <HandHeart className="text-mint-500" size={32} />
                     <h3 className="text-xl lg:text-3xl font-bold text-gray-200">
-                        Виртуальная экскурсия
+                        Познакомьтесь со мной
                     </h3>
                 </motion.div>
 

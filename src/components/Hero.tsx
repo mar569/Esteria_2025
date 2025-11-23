@@ -19,7 +19,7 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
       aria-labelledby="hero-title"
     >
       <img
-        className="hero-bg-image absolute inset-0 w-full h-full object-cover"
+        className="hero-bg-image absolute md:inset-0 w-full h-full object-cover"
         src={heroImg}
         alt="Фоновая иллюстрация косметологических процедур"
 
@@ -114,7 +114,7 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
       </div>
 
       <motion.div
-        className="absolute bottom-4 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-14 left-1/2 transform -translate-x-1/2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.5 }}

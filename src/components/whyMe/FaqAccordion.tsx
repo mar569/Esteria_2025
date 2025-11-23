@@ -66,10 +66,10 @@ const FaqAccordion: React.FC = () => {
                 {faqData.map((faq, index) => (
                     <motion.div
                         key={index}
-                        className="bg-gradient-to-b from-gray-200 to-white/90 rounded-xl shadow-lg border border-mint-500/20 hover:border-mint-400/50 transition-all duration-300 overflow-hidden"
-                        style={{ willChange: "transform, opacity" }} // Оптимизация для браузера
+                        className="bg-gradient-to-b from-gray-200 to-white/60 rounded-xl shadow-lg border border-mint-500/20 hover:border-mint-400/50 transition-all duration-300 overflow-hidden"
+                        style={{ willChange: "transform, opacity" }}
                         {...itemVariants}
-                        transition={{ ...itemVariants.transition, delay: index * 0.05 }} // Уменьшенная задержка
+                        transition={{ ...itemVariants.transition, delay: index * 0.05 }}
                     >
                         <button
                             onClick={() => toggleAccordion(index)}

@@ -59,8 +59,16 @@ span {
   scrollbar-color: transparent transparent;
   box-sizing: border-box;
 }
+
+.h2 {
+  line-height: 3.375rem;
+  background: linear-gradient(90deg, #99e9bb 0.02%, #288360 60%, #e3e0e0 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .menu-open-dome {
-  transform: translateY(200px); /* Легкий сдвиг вниз для ощущения погружения */
+  transform: translateY(200px);
   transition: transform 0.8s ease-out;
 }
 body {

@@ -46,11 +46,11 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <div className="flex space-x-2 mb-6 items-center">
+            <div className="flex space-x-2 items-center">
               <div className="w-12 h-12 rounded-full flex items-center justify-center">
                 <img src={logo} alt="" className="w-11 h-11 rounded-full" />
               </div>
-              <h3 className="font-bold text-xl">Esteria</h3>
+              <h3 className="font-bold text-xl h2">Esteria</h3>
             </div>
 
             <p className="text-gray-300 leading-relaxed">
