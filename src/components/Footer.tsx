@@ -163,7 +163,7 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
                 className="flex items-start space-x-3 group cursor-pointer"
                 whileHover={{ x: 5 }}
               >
-                <MapPin className="h-5 w-5 text-emerald-400 mt-1 group-hover:text-emerald-300 transition-colors" />
+                <MapPin className="h-5 w-5 text-emerald-500 mt-1 group-hover:text-emerald-300 transition-colors" />
                 <span className="group-hover:text-white transition-colors">
                   Чекалова, д. 10<br />Шлиссельбург
                 </span>
@@ -172,7 +172,7 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
                 className="flex items-center space-x-3 group cursor-pointer"
                 whileHover={{ x: 5 }}
               >
-                <Phone className="h-5 w-5 text-emerald-400 group-hover:text-emerald-300 transition-colors" />
+                <Phone className="h-5 w-5 text-emerald-500 group-hover:text-emerald-300 transition-colors" />
                 <a href="tel:+796578877750" className="group-hover:text-white transition-colors">
                   +7 (965) 788-77-50
                 </a>
@@ -181,7 +181,7 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
                 className="flex items-center space-x-3 group cursor-pointer"
                 whileHover={{ x: 5 }}
               >
-                <Mail className="h-5 w-5 text-emerald-400 group-hover:text-emerald-300 transition-colors" />
+                <Mail className="h-5 w-5 text-emerald-500 group-hover:text-emerald-300 transition-colors" />
                 <a href="mailto:marianna.esteria@mail.ru" className="group-hover:text-white transition-colors">
                   marianna.esteria@mail.ru
                 </a>
