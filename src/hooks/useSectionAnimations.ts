@@ -1,8 +1,8 @@
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/all'; // Убрал ScrollToPlugin, так как он не нужен для скролла
+import { ScrollTrigger } from 'gsap/all';
 import { useEffect, RefObject } from 'react';
 
-gsap.registerPlugin(ScrollTrigger); // Только ScrollTrigger для анимаций
+gsap.registerPlugin(ScrollTrigger);
 
 interface UseSectionAnimationsProps {
   heroRef: RefObject<HTMLElement>;
@@ -98,19 +98,17 @@ export const useSectionAnimations = ({
         willChange: 'transform, opacity',
       });
 
-      const heroTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 2.5,
-          invalidateOnRefresh: true,
-          fastScrollEnd: false,
-          pinSpacing: false,
-        },
-      });
-
-      heroTl
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 2.5,
+            invalidateOnRefresh: true,
+            pinSpacing: false,
+          },
+        })
         .to('.hero-bg', { opacity: 0.8, ease: 'power2.out' })
         .to('.hero-title', { y: '-60%', opacity: 0, ease: 'power2.out' }, 0);
 
@@ -124,12 +122,9 @@ export const useSectionAnimations = ({
           scrub: 2.5,
           toggleActions: 'play none none reverse',
           invalidateOnRefresh: true,
-          fastScrollEnd: false,
         },
       });
     }
-
-    // AboutMe: Как в вашем основном коде (простой animateSection)
     if (aboutRef.current) {
       const mainHeader = aboutRef.current.querySelector(
         '.main-header'

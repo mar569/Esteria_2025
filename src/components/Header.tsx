@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
-import { commonVariants } from '../utils/animations';
+
 import { navItems } from '../constants/navItems';
 import { usePreventScroll } from '../hooks/usePreventScroll';
 import { useActiveSection } from '../hooks/useActiveSection';
@@ -32,9 +32,7 @@ const Header = () => {
 
   return (
     <motion.header
-      initial="hidden"
-      animate="visible"
-      variants={commonVariants.fadeIn}
+
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-600`}
     >
       <div className="container mx-auto md:px-2 px-4 mt-4 flex items-center justify-between">
