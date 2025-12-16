@@ -3,7 +3,6 @@ import { Heart, Phone, Mail, MapPin } from 'lucide-react';
 import { FaTelegram, FaVk, FaWhatsapp } from 'react-icons/fa';
 import logo from '../assets/logo.png';
 import { smoothScrollTo } from '../utils/smoothScroll';
-
 import ScrollToTopButton from './ScrollToTopButton';
 import { forwardRef } from 'react';
 import { socialLinks } from '../utils/socialLinks';
