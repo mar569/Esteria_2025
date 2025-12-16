@@ -1,36 +1,33 @@
 import { forwardRef } from 'react';
-import { motion } from 'framer-motion';
+import { easeOut, motion } from 'framer-motion';
 import { Sparkles, ArrowRight, ChevronDown } from 'lucide-react';
 import place from '../assets/place.png';
 import heroImg from '../assets/hero.png';
 import { smoothScrollTo } from '../utils/smoothScroll';
 
-const buttonVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.6, delay: 0.4 } },
-};
+
 
 const Hero = forwardRef<HTMLElement>((_props, ref) => {
   return (
-    <section
+    <motion.section
       id="hero"
       className="min-h-screen relative flex items-center justify-center overflow-hidden md:pt-0 pt-10 pb-20 hero-bg"
       ref={ref}
       aria-labelledby="hero-title"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, ease: easeOut }}
     >
       <img
         className="hero-bg-image absolute md:inset-0 w-full h-full object-cover"
         src={heroImg}
         alt="Фоновая иллюстрация косметологических процедур"
-
-        style={{ zIndex: -1, willChange: 'transform' }}
       />
-
 
       <div className="container mx-auto px-4 py-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
 
-          <div className="hero-content" style={{ willChange: 'transform' }}>
+          <div className="hero-content" >
             <div className="flex items-center space-x-2 mb-6 hero-title">
               <Sparkles className="text-mint-300 animate-pulse" size={24} />
               <span className="text-mint-300 font-medium uppercase tracking-wider text-sm">
@@ -60,9 +57,7 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
                   e.preventDefault();
                   smoothScrollTo('#appointment');
                 }}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
+
                 whileHover={{ scale: 1.05, boxShadow: '0 10px 20px rgba(0,0,0,0.2)' }}
                 whileTap={{ scale: 0.95 }}
                 style={{
@@ -81,9 +76,7 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
                   e.preventDefault();
                   smoothScrollTo('#services');
                 }}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
+
                 whileHover={{ scale: 1.05, backgroundColor: '#04ae78', color: 'white' }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center justify-center px-8 py-4 border-2 border-mint-600 text-mint-700 font-semibold rounded-full hover:bg-mint-600 hover:text-white transition-all duration-300 group"
@@ -97,9 +90,7 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
 
           <div
             className=" hero-title relative cursor-pointer transition-shadow duration-300 hover:shadow-2xl rounded-3xl"
-            style={{ willChange: 'transform' }}
           >
-
             <div className="absolute inset-0 bg-gradient-to-r from-mint-400/20 to-beige-400/20 rounded-3xl blur-3xl"></div>
             <img
               src={place}
@@ -129,7 +120,7 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
           <ChevronDown className="w-4 h-4 text-mint-500 mt-2 animate-pulse" />
         </motion.div>
       </motion.div>
-    </section>
+    </motion.section>
   );
 });
 

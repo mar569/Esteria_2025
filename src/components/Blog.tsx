@@ -2,16 +2,14 @@ import { forwardRef } from 'react';
 import { motion } from 'framer-motion';
 import { articles } from '../utils/articlesData';
 import ArticleCard from './animate/ArticleCard';
-import { advancedVariants, commonVariants } from '../utils/animations';
+import { commonVariants } from '../utils/animations';
 
 const Blog = forwardRef<HTMLElement>((_, ref) => {
   return (
     <section id="blog" className="py-10 relative" ref={ref} data-parallax-speed="0.3">
       <motion.div
         className="container mx-auto px-4"
-        variants={commonVariants.staggerContainer}
-        initial="hidden"
-        animate="visible"
+
       >
         <div className="text-center mb-16">
           <motion.h2
@@ -26,17 +24,14 @@ const Blog = forwardRef<HTMLElement>((_, ref) => {
 
         <motion.div
           className="grid lg:grid-cols-3 gap-8"
-          variants={commonVariants.staggerContainer}
+          variants={commonVariants.fadeIn}
           initial="hidden"
           animate="visible"
         >
           {articles.map((article, index) => (
             <motion.div
               key={article.id}
-              variants={advancedVariants.bounceIn}
-              initial="hidden"
-              animate="visible"
-              transition={{ delay: index * 0.1 }}
+
             >
               <ArticleCard article={article} index={index} />
             </motion.div>

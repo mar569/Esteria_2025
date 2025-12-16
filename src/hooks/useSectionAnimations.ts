@@ -95,7 +95,6 @@ export const useSectionAnimations = ({
       gsap.set('.hero-title', {
         y: 0,
         opacity: 1,
-        willChange: 'transform, opacity',
       });
 
       gsap

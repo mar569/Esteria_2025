@@ -42,15 +42,17 @@ function App() {
         <ServiceProvider>
           <Suspense fallback={
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100%' }}>
+
               <div className="loader">
-                <div className="circle">
-                  <div className="dot"></div>
-                  <div className="outline"></div>
-                </div>
-                <div className="circle">
-                  <div className="dot"></div>
-                  <div className="outline"></div>
-                </div>
+                <div className="square" id="sq1"></div>
+                <div className="square" id="sq2"></div>
+                <div className="square" id="sq3"></div>
+                <div className="square" id="sq4"></div>
+                <div className="square" id="sq5"></div>
+                <div className="square" id="sq6"></div>
+                <div className="square" id="sq7"></div>
+                <div className="square" id="sq8"></div>
+                <div className="square" id="sq9"></div>
               </div>
             </div>
           }>
