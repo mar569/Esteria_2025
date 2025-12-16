@@ -92,10 +92,6 @@ export const useSectionAnimations = ({
 
     if (heroRef.current) {
       gsap.set('.hero-bg', { y: 0, opacity: 1, willChange: 'opacity' });
-      gsap.set('.hero-title', {
-        y: 0,
-        opacity: 1,
-      });
 
       gsap
         .timeline({
@@ -108,8 +104,7 @@ export const useSectionAnimations = ({
             pinSpacing: false,
           },
         })
-        .to('.hero-bg', { opacity: 0.8, ease: 'power2.out' })
-        .to('.hero-title', { x: '20%', opacity: 0.7, ease: 'power2.out' }, 0);
+        .to('.hero-bg', { opacity: 0.8, ease: 'power2.out' });
 
       gsap.to('.hero-bg', {
         opacity: 0,
@@ -124,6 +119,7 @@ export const useSectionAnimations = ({
         },
       });
     }
+
     if (aboutRef.current) {
       const mainHeader = aboutRef.current.querySelector(
         '.main-header'

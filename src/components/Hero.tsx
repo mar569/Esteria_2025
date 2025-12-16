@@ -28,8 +28,8 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
 
           <div className="hero-content" >
-            <div className="flex items-center space-x-2 mb-6 hero-title">
-              <Sparkles className="text-mint-300 animate-pulse" size={24} />
+            <div className="flex items-center space-x-2 mb-6">
+              <Sparkles className="text-mint-300" size={24} />
               <span className="text-mint-300 font-medium uppercase tracking-wider text-sm">
                 Косметология
               </span>
@@ -38,19 +38,19 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
 
             <h1
               id="hero-title"
-              className="hero-title text-4xl lg:text-6xl font-bold text-gray-300 mb-6 leading-tight"
+              className="text-4xl lg:text-6xl font-bold text-gray-300 mb-6 leading-tight"
             >
               Красота и уход
               <span className="block text-[#027A52]">для вашей кожи</span>
             </h1>
 
-            <p className="hero-title text-lg text-gray-300 mb-8 leading-relaxed">
+            <p className="text-lg text-gray-300 mb-8 leading-relaxed">
               Профессиональные косметологические процедуры в Шлиссельбурге.
               Массажи (PlasticLift), чистки лица, биоревитализация, аугментация губ и многое другое — всё в уютной и комфортной обстановке.
             </p>
 
 
-            <div className="flex flex-col sm:flex-row gap-4 hero-title">
+            <div className="flex flex-col sm:flex-row gap-4">
               <motion.a
                 href="#appointment"
                 onClick={(e) => {
@@ -89,7 +89,7 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
 
 
           <div
-            className=" hero-title relative cursor-pointer transition-shadow duration-300 hover:shadow-2xl rounded-3xl"
+            className=" relative cursor-pointer transition-shadow duration-300 hover:shadow-2xl rounded-3xl"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-mint-400/20 to-beige-400/20 rounded-3xl blur-3xl"></div>
             <img
