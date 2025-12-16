@@ -77,7 +77,7 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
                   smoothScrollTo('#services');
                 }}
 
-                whileHover={{ scale: 1.05, backgroundColor: '#04ae78', color: 'white' }}
+                whileHover={{ scale: 1.05, }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center justify-center px-8 py-4 border-2 border-mint-600 text-mint-700 font-semibold rounded-full hover:bg-mint-600 hover:text-white transition-all duration-300 group"
                 aria-label="Посмотреть услуги"
