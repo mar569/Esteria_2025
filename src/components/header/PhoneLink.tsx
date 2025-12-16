@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Phone } from 'lucide-react';
-import { commonVariants } from '../../utils/animations';
+
 
 
 interface PhoneLinkProps {
@@ -11,10 +11,7 @@ interface PhoneLinkProps {
 const PhoneLink: React.FC<PhoneLinkProps> = ({ isScrolled }) => (
     <motion.div
         className="hidden lg:flex items-center space-x-4"
-        variants={commonVariants.fadeIn}
-        initial="hidden"
-        animate="visible"
-        transition={{ delay: 0.4 }}
+
     >
         <a
             href="tel:+78123456789"

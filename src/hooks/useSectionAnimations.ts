@@ -41,25 +41,14 @@ export const useSectionAnimations = ({
 
     const animateSection = (
       ref: RefObject<HTMLElement>,
-      fromProps: object,
-      toProps: object,
-      options?: {
-        staggerChildren?: boolean;
-        start?: string;
-        end?: string;
-        ease?: string;
-        duration?: number;
-      }
+      fromProps: any,
+      toProps: any,
+      staggerChildren: boolean = false,
+      start: string = 'top 85%',
+      end: string = 'bottom 15%',
+      customEase: string = 'power2.out'
     ) => {
       if (ref?.current) {
-        const {
-          staggerChildren = false,
-          start = 'top 85%',
-          end = 'bottom 15%',
-          ease = 'power2.out',
-          duration = 1.5,
-        } = options || {};
-
         gsap.set(ref.current, fromProps);
 
         const tl = gsap.timeline({
@@ -68,15 +57,17 @@ export const useSectionAnimations = ({
             start,
             end,
             scrub: 2.5,
-            toggleActions: 'play none none reverse',
+            toggleActions: 'play none none none',
+            fastScrollEnd: false,
             invalidateOnRefresh: true,
+            markers: false,
           },
         });
 
         tl.to(ref.current, {
           ...toProps,
-          duration,
-          ease,
+          duration: 1.5,
+          ease: customEase,
         });
 
         if (staggerChildren) {
@@ -90,7 +81,7 @@ export const useSectionAnimations = ({
                 scale: 1,
                 duration: 1.5,
                 stagger: 0.2,
-                ease,
+                ease: customEase,
               },
               '-=0.5'
             );
@@ -101,7 +92,10 @@ export const useSectionAnimations = ({
 
     if (heroRef.current) {
       gsap.set('.hero-bg', { y: 0, opacity: 1, willChange: 'opacity' });
-      gsap.set('.hero-title', { y: 0, opacity: 1 });
+      gsap.set('.hero-title', {
+        y: 0,
+        opacity: 1,
+      });
 
       gsap
         .timeline({
@@ -115,7 +109,7 @@ export const useSectionAnimations = ({
           },
         })
         .to('.hero-bg', { opacity: 0.8, ease: 'power2.out' })
-        .to('.hero-title', { y: '-60%', opacity: 0, ease: 'power2.out' }, 0);
+        .to('.hero-title', { x: '20%', opacity: 0.7, ease: 'power2.out' }, 0);
 
       gsap.to('.hero-bg', {
         opacity: 0,
@@ -130,7 +124,6 @@ export const useSectionAnimations = ({
         },
       });
     }
-
     if (aboutRef.current) {
       const mainHeader = aboutRef.current.querySelector(
         '.main-header'
@@ -141,16 +134,13 @@ export const useSectionAnimations = ({
         aboutRef,
         { y: 100, opacity: 0 },
         { y: 0, opacity: 1, scale: 1 },
-        {
-          staggerChildren: true,
-          start: 'top 90%',
-          end: 'bottom 15%',
-          ease: 'power3.out',
-        }
+        true,
+        'top 90%',
+        'bottom 15%',
+        'power3.out'
       );
     }
 
-    // Простая анимация для остальных секций
     animateSection(servicesRef, { x: 50, opacity: 0 }, { x: -5, opacity: 1 });
     animateSection(whymeRef, { x: -20, opacity: 0 }, { x: 5, opacity: 1 });
     animateSection(contactRef, { x: -40, opacity: 0 }, { x: 0, opacity: 1 });
@@ -177,6 +167,7 @@ export const useSectionAnimations = ({
           end: 'bottom top',
           scrub: 2.5,
           invalidateOnRefresh: true,
+          fastScrollEnd: false,
         },
       });
     }
@@ -193,6 +184,7 @@ export const useSectionAnimations = ({
           end: 'top 20%',
           scrub: 2.5,
           invalidateOnRefresh: true,
+          fastScrollEnd: false,
         },
       });
     }
