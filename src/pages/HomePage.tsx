@@ -77,6 +77,7 @@ const HomePage: React.FC = () => {
             <section ref={reviewsRef} id="reviews" style={{ position: 'relative' }}>
                 <Reviews />
             </section>
+            
 
             <section ref={appointmentRef} id="appointment" style={{ position: 'relative' }}>
                 <Appointment />

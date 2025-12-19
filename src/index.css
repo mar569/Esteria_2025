@@ -32,6 +32,10 @@ body {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
 }
+body {
+  text-rendering: optimizeSpeed;
+  font-smoothing: antialiased; /* Это для WebKit-браузеров */
+}
 body::-webkit-scrollbar {
   display: none;
 }
@@ -766,12 +770,12 @@ body {
   bottom: clamp(16px, 5vw, 24px);
   left: clamp(16px, 5vw, 24px);
   right: clamp(16px, 5vw, 24px);
-  z-index: 2;
+  z-index: 200;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: clamp(16px, 6vw, 50px);
   padding: 14px 8px;
@@ -810,13 +814,13 @@ body {
 .pc-handle {
   font-size: clamp(14px, 4vw, 10px);
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 1);
   line-height: 1.2;
 }
 
 .pc-status {
   font-size: clamp(12px, 3vw, 14px);
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 1);
   line-height: 1.2;
 }
 
@@ -829,7 +833,7 @@ body {
   color: rgba(255, 255, 255, 0.9);
   cursor: pointer;
   transition: all 0.2s ease;
-  backdrop-filter: blur(10px);
+
   box-shadow: 10px 10px 20px rgba(109, 79, 123, 0.669) inset -10px -10px 20px
     rgba(0, 0, 0, 0.8);
 }

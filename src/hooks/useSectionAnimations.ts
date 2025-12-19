@@ -56,9 +56,8 @@ export const useSectionAnimations = ({
             trigger: ref.current,
             start,
             end,
-            scrub: 2.5,
             toggleActions: 'play none none none',
-            fastScrollEnd: false,
+       
             invalidateOnRefresh: true,
             markers: false,
           },
@@ -90,6 +89,7 @@ export const useSectionAnimations = ({
       }
     };
 
+    // Анимации для hero
     if (heroRef.current) {
       gsap.set('.hero-bg', { y: 0, opacity: 1, willChange: 'opacity' });
 
@@ -99,7 +99,7 @@ export const useSectionAnimations = ({
             trigger: heroRef.current,
             start: 'top top',
             end: 'bottom top',
-            scrub: 2.5,
+        
             invalidateOnRefresh: true,
             pinSpacing: false,
           },
@@ -113,7 +113,7 @@ export const useSectionAnimations = ({
           trigger: aboutRef.current,
           start: 'top 50%',
           end: 'top 20%',
-          scrub: 2.5,
+    
           toggleActions: 'play none none reverse',
           invalidateOnRefresh: true,
         },
@@ -137,22 +137,12 @@ export const useSectionAnimations = ({
       );
     }
 
+
     animateSection(servicesRef, { x: 50, opacity: 0 }, { x: -5, opacity: 1 });
     animateSection(whymeRef, { x: -20, opacity: 0 }, { x: 5, opacity: 1 });
     animateSection(contactRef, { x: -40, opacity: 0 }, { x: 0, opacity: 1 });
-    animateSection(galleryRef, { x: -40, opacity: 0 }, { x: 10, opacity: 1 });
-    animateSection(reviewsRef, { x: -50, opacity: 0 }, { x: 10, opacity: 1 });
-    animateSection(
-      appointmentRef,
-      { x: 100, opacity: 0 },
-      { x: -10, opacity: 1 }
-    );
-    animateSection(
-      blogRef,
-      { scale: 0.9, opacity: 0 },
-      { scale: 1, opacity: 1 }
-    );
 
+   
     if (contactRef.current) {
       gsap.to(contactRef.current, {
         backgroundPosition: '50% 100%',
@@ -161,13 +151,13 @@ export const useSectionAnimations = ({
           trigger: contactRef.current,
           start: 'top right',
           end: 'bottom top',
-          scrub: 2.5,
           invalidateOnRefresh: true,
           fastScrollEnd: false,
         },
       });
     }
 
+    // Анимация для футера
     if (footerRef.current) {
       gsap.set(footerRef.current, { zIndex: 10, y: -100, opacity: 0 });
       gsap.to(footerRef.current, {
@@ -178,7 +168,7 @@ export const useSectionAnimations = ({
           trigger: footerRef.current,
           start: 'top bottom',
           end: 'top 20%',
-          scrub: 2.5,
+          
           invalidateOnRefresh: true,
           fastScrollEnd: false,
         },

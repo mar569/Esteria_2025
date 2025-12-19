@@ -52,11 +52,20 @@ const Gallery = forwardRef<HTMLElement>((_props, ref) => {
 
   const handleCategoryChange = (newCategory: string) => {
     setActiveCategory(newCategory);
-    setCategoryTrigger(prev => prev + 1);
+    setCategoryTrigger((prev) => prev + 1);
   };
 
   return (
-    <section id="gallery" className="py-16 relative" ref={ref} data-parallax-speed="0.35">
+    <motion.section
+      id="gallery"
+      className="py-16 relative"
+      ref={ref}
+      data-parallax-speed="0.35"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      viewport={{ once: true, amount: 0.2 }}
+    >
       <motion.div
         className="container mx-auto px-4"
         variants={commonVariants.staggerContainer}
@@ -66,6 +75,7 @@ const Gallery = forwardRef<HTMLElement>((_props, ref) => {
         <motion.div variants={commonVariants.fadeIn}>
           <GalleryHeader />
         </motion.div>
+
         <motion.div variants={commonVariants.slideIn}>
           <GalleryCategories
             categories={categories}
@@ -73,6 +83,7 @@ const Gallery = forwardRef<HTMLElement>((_props, ref) => {
             setActiveCategory={handleCategoryChange}
           />
         </motion.div>
+
         <motion.div variants={commonVariants.fadeIn}>
           <GalleryGrid
             images={filteredImages}
@@ -81,6 +92,7 @@ const Gallery = forwardRef<HTMLElement>((_props, ref) => {
             categoryTrigger={categoryTrigger}
           />
         </motion.div>
+
         <motion.div variants={commonVariants.slideIn}>
           <VirtualTour
             customIndex={filteredImages.length + categories.length + 3}
@@ -101,7 +113,7 @@ const Gallery = forwardRef<HTMLElement>((_props, ref) => {
           />
         )}
       </AnimatePresence>
-    </section>
+    </motion.section>
   );
 });
 

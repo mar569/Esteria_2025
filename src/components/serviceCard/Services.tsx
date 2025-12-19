@@ -25,25 +25,44 @@ const Services = forwardRef<HTMLElement, ServicesProps>(({ onSelectService }, re
   };
 
   useEffect(() => {
+    if (!ref || !('current' in ref) || !ref.current) return;
+  
+    const section = ref.current;
+    const isMobile = window.innerWidth <= 768;
+    let hasShownOnMobile = false;
+  
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+          if (entry.target !== section) return;
+  
+          if (isMobile) {
+            if (!hasShownOnMobile && entry.isIntersecting) {
+              hasShownOnMobile = true;
+              setShowPopup(true);
+              observer.unobserve(section);
+            }
+            return;
+          }
+
+          if (!entry.isIntersecting || entry.intersectionRatio <= 0.5) {
+            setShowPopup(false);
+          } else {
             setShowPopup(true);
           }
         });
       },
-      { threshold: 0.1 }
-    );
+      {
 
-    if (ref && 'current' in ref && ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref && 'current' in ref && ref.current) {
-        observer.unobserve(ref.current);
+        rootMargin: '0px 0px -30% 0px',
+        threshold: [0, 0.25, 0.5, 0.75, 1],
       }
+    );
+  
+    observer.observe(section);
+  
+    return () => {
+      observer.disconnect();
     };
   }, [ref]);
 

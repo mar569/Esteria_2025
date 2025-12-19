@@ -24,7 +24,7 @@ const StatCard: React.FC<StatCardProps> = ({ icon, number, label }) => (
         </div>
 
         <div
-            className="text-2xl lg:text-3xl font-bold mb-2 leading-tight"
+            className="text-2xl lg:text-3xl font-semibold mb-2 leading-tight"
             style={{
                 color: 'rgb(255, 255, 255)',
                 opacity: 1,
@@ -37,8 +37,9 @@ const StatCard: React.FC<StatCardProps> = ({ icon, number, label }) => (
         <div
             className="text-[14px] leading-relaxed"
             style={{
-                color: 'rgba(255, 255, 255, 0.64)',
+                color: 'rgba(255, 255, 255, 0.9)',
                 opacity: 1
+
             }}
 
         >
